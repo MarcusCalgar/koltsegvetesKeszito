@@ -3,6 +3,7 @@ package pkg43_koltsegvetes.gui;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -31,6 +32,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private List<Bevetel> bevetelekLista = new ArrayList<>();
     private List<Kiadas> kiadasokLista = new ArrayList<>();
     private Tranzakcio kijeloltTranzakcio;
+    private DecimalFormat szamFormazo = new DecimalFormat("###,### Ft");
 
     public KoltsegvetesFoablak() {
         initComponents();
@@ -241,21 +243,25 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         lbOsszesMegtakaritas.setPreferredSize(new java.awt.Dimension(100, 15));
 
         tfOsszesMegtakaritas.setEditable(false);
+        tfOsszesMegtakaritas.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lbOsszesVagyon.setText("Összes Vagyon");
         lbOsszesVagyon.setPreferredSize(new java.awt.Dimension(100, 15));
 
         tfOsszesVagyon.setEditable(false);
+        tfOsszesVagyon.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lbOsszesVagyon1.setText("Összes Pénz");
         lbOsszesVagyon1.setPreferredSize(new java.awt.Dimension(100, 15));
 
         tfOsszesPenz.setEditable(false);
+        tfOsszesPenz.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lbOsszesSzepKartya.setText("Összes Szép Kártya");
         lbOsszesSzepKartya.setPreferredSize(new java.awt.Dimension(100, 15));
 
         tfOsszesSzepKartya.setEditable(false);
+        tfOsszesSzepKartya.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         jMenu1.setText("Pénztárcák");
 
@@ -329,9 +335,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                             .addComponent(lbOsszesVagyon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addComponent(tfOsszesPenz, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfOsszesPenz, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfOsszesMegtakaritas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -552,31 +556,33 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 osszeg += tarca.getOsszeg();
             }
         }
-        tfOsszesMegtakaritas.setText(osszeg + "");
+       tfOsszesMegtakaritas.setText(szamFormazo.format(osszeg) + "");
     }
 
-    private void osszesPenzBeallit() {
+    private int osszesPenzBeallit() {
         int osszeg = 0;
         for (Penztarca tarca : penztarcakLista) {
             if ("Készpénz".equals(tarca.getTipus()) || "Bankkártya".equals(tarca.getTipus())) {
                 osszeg += tarca.getOsszeg();
             }
         }
-        tfOsszesPenz.setText(osszeg + "");
+        tfOsszesPenz.setText(szamFormazo.format(osszeg) + "");
+        return osszeg;
     }
 
-    private void osszesSzepKartyaBeallit() {
+    private int osszesSzepKartyaBeallit() {
         int osszeg = 0;
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getTipus().contains("zseb")) {
                 osszeg += tarca.getOsszeg();
             }
         }
-        tfOsszesSzepKartya.setText(osszeg + "");
+        tfOsszesSzepKartya.setText(szamFormazo.format(osszeg) + "");
+        return osszeg;
     }
 
     private void osszesVagyonBeallit() {
-        tfOsszesVagyon.setText((Integer.parseInt(tfOsszesPenz.getText()) + Integer.parseInt(tfOsszesSzepKartya.getText())) + "");
+        tfOsszesVagyon.setText(szamFormazo.format(osszesPenzBeallit() + osszesSzepKartyaBeallit()) + "");
     }
 
     private void penztarcaAdatbazisbaMent(Penztarca penztarca) {
@@ -670,7 +676,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             Penztarca tarca = (Penztarca) elem;
             ujSor[0] = tarca.getNev();
             ujSor[1] = tarca.getTipus();
-            ujSor[2] = tarca.getOsszeg();
+            ujSor[2] = szamFormazo.format(tarca.getOsszeg());
             return ujSor;
         } else if (elem instanceof Bevetel) {
             Object[] ujSor = new Object[bevetelekTablaOszlopSzam];
