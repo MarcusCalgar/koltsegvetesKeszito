@@ -107,17 +107,20 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="bevetelekTablaTarolo" min="-2" pref="279" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="kiadasokTablaTarolo" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
+                                  <Component id="bevetelekTablaTarolo" alignment="0" min="-2" pref="279" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbOsszesBevetel" min="-2" pref="99" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="tfOsszesBevetel" min="-2" pref="126" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="kiadasokTablaTarolo" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
@@ -179,6 +182,7 @@
                           <Component id="tfOsszesMegtakaritas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -499,6 +503,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfOsszesBevetel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes kiad&#xe1;s"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
