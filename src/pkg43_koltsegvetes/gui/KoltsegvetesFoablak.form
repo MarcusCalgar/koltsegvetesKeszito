@@ -83,13 +83,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="lbOsszesVagyon" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfOsszesVagyon" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="956" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
@@ -116,13 +109,57 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="kiadasokTablaTarolo" pref="562" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbOsszesRezsi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOsszesEtkezes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOsszesEgeszseg" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfOsszesRezsi" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                          <Component id="tfOsszesEtkezes" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                          <Component id="tfOsszesEgeszseg" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbOsszesKozlekedes" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOsszesElelmiszer" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfOsszesElelmiszer" max="32767" attributes="0"/>
+                                          <Component id="tfOsszesKozlekedes" max="32767" attributes="0"/>
+                                          <Component id="tfOsszesEgyeb" pref="126" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="kiadasokTablaTarolo" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="lbOsszesEgyeb" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lbOsszesKiadas" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lbOsszesVagyon" min="-2" pref="140" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfOsszesVagyon" min="-2" pref="108" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="tfOsszesKiadas" min="-2" pref="126" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -137,7 +174,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="lbOsszesSzepKartya" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tfOsszesSzepKartya" min="-2" pref="108" max="-2" attributes="0"/>
@@ -169,6 +206,18 @@
                       <Component id="btAtvezetes" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btTorol" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbOsszesSzepKartya" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfOsszesSzepKartya" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btKilepes" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="lbOsszesVagyon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfOsszesVagyon" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -176,33 +225,59 @@
                           <Component id="bevetelekTablaTarolo" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbOsszesMegtakaritas" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfOsszesMegtakaritas" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbOsszesVagyon1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfOsszesPenz" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbOsszesMegtakaritas" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfOsszesMegtakaritas" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfOsszesBevetel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbOsszesRezsi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbOsszesElelmiszer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfOsszesElelmiszer" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbOsszesVagyon1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfOsszesPenz" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="105" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lbOsszesEtkezes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOsszesKozlekedes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfOsszesKozlekedes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lbOsszesEgeszseg" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOsszesEgyeb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfOsszesEgyeb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tfOsszesRezsi" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      <Component id="tfOsszesEtkezes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tfOsszesEgeszseg" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbOsszesKiadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfOsszesKiadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbOsszesSzepKartya" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfOsszesSzepKartya" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btKilepes" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
-                  <Component id="lbOsszesVagyon" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfOsszesVagyon" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -503,10 +578,86 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfOsszesBevetel">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xd6;sszes kiad&#xe1;s"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesKiadas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes Kiad&#xe1;s"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesKiadas">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesRezsi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes Rezsi"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesRezsi">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesElelmiszer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes &#xc9;lelmiszer"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesElelmiszer">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesEtkezes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes &#xc9;tkez&#xe9;s"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesEtkezes">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesKozlekedes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes K&#xf6;zleked&#xe9;s"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesKozlekedes">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesEgeszseg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes Eg&#xe9;szs&#xe9;g"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesEgeszseg">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbOsszesEgyeb">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes Egy&#xe9;b"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfOsszesEgyeb">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="11"/>
       </Properties>
     </Component>
   </SubComponents>
