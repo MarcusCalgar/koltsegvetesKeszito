@@ -50,7 +50,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         } catch (KoltsegvetesException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }
-        setBevetelTablaFejlecActionListener();
+        rendezesiLehetosegBeallit();
         tablazatokFeltolt();
         osszegzoMezokBeallit();
     }
@@ -683,6 +683,11 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         osszesKiadasTipusMezokBeallit();
     }
 
+    private void rendezesiLehetosegBeallit() {
+        setBevetelTablaFejlecActionListener();
+        setKiadasTablaFejlecActionListener();
+    }
+
     //Action listener a bevételek táblához
     private void setBevetelTablaFejlecActionListener() {
         bevetelekTabla.getTableHeader().addMouseListener(new MouseAdapter() {
@@ -715,6 +720,52 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                         break;
                 }
                 tablaFeltolt(bevetelekTabla, bevetelekLista);
+            }
+        });
+    }
+
+    //Action listener a kivételek táblához
+    private void setKiadasTablaFejlecActionListener() {
+        kiadasokTabla.getTableHeader().addMouseListener(new MouseAdapter() {
+            DatumComparator datumComp = new DatumComparator();
+            PenztarcaComparator tarcaComp = new PenztarcaComparator();
+            MegnevezesComparator megnevezesComp = new MegnevezesComparator();
+            OsszegComparator osszegComp = new OsszegComparator();
+            KategoriaComparator kategoriaComp = new KategoriaComparator();
+            VasarlasHelyComparator vasarlashelyComp = new VasarlasHelyComparator();
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int oszlopSzama = kiadasokTabla.columnAtPoint(e.getPoint());
+                switch (oszlopSzama) {
+                    case 0:
+                        kiadasokLista.sort(datumComp);
+                        datumComp.setForditott(!datumComp.getForditott());
+                        break;
+                    case 1:
+                        kiadasokLista.sort(tarcaComp);
+                        tarcaComp.setForditott(!tarcaComp.getForditott());
+                        break;
+                    case 2:
+                        kiadasokLista.sort(megnevezesComp);
+                        megnevezesComp.setForditott(!megnevezesComp.getForditott());
+                        break;
+                    case 3:
+                        kiadasokLista.sort(kategoriaComp);
+                        kategoriaComp.setForditott(!kategoriaComp.getForditott());
+                        break;
+                    case 4:
+                        kiadasokLista.sort(vasarlashelyComp);
+                        vasarlashelyComp.setForditott(!vasarlashelyComp.getForditott());
+                        break;
+                    case 5:
+                        kiadasokLista.sort(osszegComp);
+                        osszegComp.setForditott(!osszegComp.getForditott());
+                        break;
+                    default:
+                        break;
+                }
+                tablaFeltolt(kiadasokTabla, kiadasokLista);
             }
         });
     }
