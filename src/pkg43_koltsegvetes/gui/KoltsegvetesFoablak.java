@@ -1,5 +1,7 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,14 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import pkg43_koltsegvetes.dao.impl.PenztarcaDAO_JDBC;
-import pkg43_koltsegvetes.dao.impl.BevetelDAO_JDBC;
-import pkg43_koltsegvetes.dao.impl.KiadasDAO_JDBC;
+import pkg43_koltsegvetes.comparator.*;
+import pkg43_koltsegvetes.dao.impl.*;
 import pkg43_koltsegvetes.exception.KoltsegvetesException;
-import pkg43_koltsegvetes.model.Bevetel;
-import pkg43_koltsegvetes.model.Kiadas;
-import pkg43_koltsegvetes.model.Penztarca;
-import pkg43_koltsegvetes.model.Tranzakcio;
+import pkg43_koltsegvetes.model.*;
 
 public class KoltsegvetesFoablak extends javax.swing.JFrame {
 
@@ -52,6 +50,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         } catch (KoltsegvetesException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }
+        setBevetelTablaFejlecActionListener();
         tablazatokFeltolt();
         osszegzoMezokBeallit();
     }
@@ -370,15 +369,15 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                             .addComponent(tfOsszesMegtakaritas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lbOsszesBevetel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(tfOsszesBevetel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(tfOsszesBevetel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 65, Short.MAX_VALUE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kiadasokTablaTarolo, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbOsszesRezsi)
                                             .addComponent(lbOsszesEtkezes)
@@ -388,7 +387,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                             .addComponent(tfOsszesRezsi, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfOsszesEgeszseg, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(81, 81, 81)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbOsszesKozlekedes)
                                             .addComponent(lbOsszesElelmiszer))
@@ -396,7 +395,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(tfOsszesElelmiszer)
                                             .addComponent(tfOsszesKozlekedes)
-                                            .addComponent(tfOsszesEgyeb, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))))
+                                            .addComponent(tfOsszesEgyeb, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+                                    .addComponent(kiadasokTablaTarolo, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,15 +466,14 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                             .addComponent(kiadasokTablaTarolo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                             .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbOsszesMegtakaritas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfOsszesMegtakaritas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbOsszesBevetel)
                                     .addComponent(tfOsszesBevetel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbOsszesRezsi)
                                     .addComponent(lbOsszesElelmiszer)
                                     .addComponent(tfOsszesElelmiszer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -483,24 +482,28 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                     .addComponent(tfOsszesPenz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(105, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lbOsszesEtkezes)
                                             .addComponent(lbOsszesKozlekedes)
                                             .addComponent(tfOsszesKozlekedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lbOsszesEgeszseg)
                                             .addComponent(lbOsszesEgyeb)
                                             .addComponent(tfOsszesEgyeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfOsszesRezsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(tfOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfOsszesEgeszseg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lbOsszesEgeszseg)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(tfOsszesRezsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lbOsszesRezsi))
+                                            .addGap(23, 23, 23)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(tfOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lbOsszesEtkezes))
+                                            .addGap(18, 18, 18)
+                                            .addComponent(tfOsszesEgeszseg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbOsszesKiadas)
@@ -680,6 +683,42 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         osszesKiadasTipusMezokBeallit();
     }
 
+    //Action listener a bevételek táblához
+    private void setBevetelTablaFejlecActionListener() {
+        bevetelekTabla.getTableHeader().addMouseListener(new MouseAdapter() {
+            DatumComparator datumComp = new DatumComparator();
+            PenztarcaComparator tarcaComp = new PenztarcaComparator();
+            MegnevezesComparator megnevezesComp = new MegnevezesComparator();
+            OsszegComparator osszegComp = new OsszegComparator();
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int oszlopSzama = bevetelekTabla.columnAtPoint(e.getPoint());
+                switch (oszlopSzama) {
+                    case 0:
+                        bevetelekLista.sort(datumComp);
+                        datumComp.setForditott(!datumComp.getForditott());
+                        break;
+                    case 1:
+                        bevetelekLista.sort(tarcaComp);
+                        tarcaComp.setForditott(!tarcaComp.getForditott());
+                        break;
+                    case 2:
+                        bevetelekLista.sort(megnevezesComp);
+                        megnevezesComp.setForditott(!megnevezesComp.getForditott());
+                        break;
+                    case 3:
+                        bevetelekLista.sort(osszegComp);
+                        osszegComp.setForditott(!osszegComp.getForditott());
+                        break;
+                    default:
+                        break;
+                }
+                tablaFeltolt(bevetelekTabla, bevetelekLista);
+            }
+        });
+    }
+
     private void osszesKiadasTipusMezokBeallit() {
         int rezsiOsszeg = 0, elelmiszerOsszeg = 0, etkezesOsszeg = 0, kozlekedesOsszeg = 0, egeszsegOsszeg = 0, egyebOsszeg = 0;
         for (Kiadas kiadas : kiadasokLista) {
@@ -734,7 +773,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             if ("Megtakarítási számla".equals(tarca.getTipus())) {
                 osszeg += tarca.getOsszeg();
             }
-        }        
+        }
         mezoBeallit(tfOsszesMegtakaritas, osszeg);
     }
 
@@ -763,7 +802,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     }
 
     // Ez a metódus használja az összes pénzt és szép kártyát kalkuláló metódust, azok ezért adják vissza az értéküket.
-    private void osszesVagyonBeallit() {       
+    private void osszesVagyonBeallit() {
         mezoBeallit(tfOsszesVagyon, osszesPenzBeallit() + osszesSzepKartyaBeallit());
     }
 
