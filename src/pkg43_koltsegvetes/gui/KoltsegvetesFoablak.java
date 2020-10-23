@@ -1,5 +1,7 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -33,8 +35,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private Tranzakcio kijeloltTranzakcio;
     private DecimalFormat szamFormazo = new DecimalFormat("###,### Ft");
 
-    public KoltsegvetesFoablak() {
-        initComponents();
+    public KoltsegvetesFoablak() {        
+        initComponents();        
         try {
             kapcsolat = DriverManager.getConnection("jdbc:mysql://localhost:3306/koltsegvetes_test?useSSL=false", "root", "1234");
         } catch (SQLException e) {
@@ -50,7 +52,9 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         } catch (KoltsegvetesException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }
-        rendezesiLehetosegBeallit();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
+        tablazatFejlecMutatoBeallit();
+        tablazatRendezesiLehetosegekBeallit();
         tablazatokFeltolt();
         osszegzoMezokBeallit();
     }
@@ -59,8 +63,6 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         lbPenztarcak = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         penztarcakTable = new javax.swing.JTable();
@@ -93,7 +95,6 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tfOsszesRezsi = new javax.swing.JTextField();
         lbOsszesElelmiszer = new javax.swing.JLabel();
         tfOsszesElelmiszer = new javax.swing.JTextField();
-        lbOsszesEtkezes = new javax.swing.JLabel();
         tfOsszesEtkezes = new javax.swing.JTextField();
         lbOsszesKozlekedes = new javax.swing.JLabel();
         tfOsszesKozlekedes = new javax.swing.JTextField();
@@ -101,13 +102,10 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tfOsszesEgeszseg = new javax.swing.JTextField();
         lbOsszesEgyeb = new javax.swing.JLabel();
         tfOsszesEgyeb = new javax.swing.JTextField();
+        lbOsszesEtkezes = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         penztarcaKezelesMenuItem = new javax.swing.JMenuItem();
-
-        jMenuItem5.setText("jMenuItem5");
-
-        jMenuItem6.setText("jMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Családi Költségvetés Tervező");
@@ -142,7 +140,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         penztarcakTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(penztarcakTable);
 
-        lbFoablakCim.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        lbFoablakCim.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         lbFoablakCim.setText("Családi Költségvetés Tervező");
 
         lbBevetelek.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -305,8 +303,6 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tfOsszesElelmiszer.setEditable(false);
         tfOsszesElelmiszer.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
-        lbOsszesEtkezes.setText("Összes Étkezés");
-
         tfOsszesEtkezes.setEditable(false);
         tfOsszesEtkezes.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
@@ -324,6 +320,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
 
         tfOsszesEgyeb.setEditable(false);
         tfOsszesEgyeb.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
+        lbOsszesEtkezes.setText("Összes Étkezés");
 
         jMenu1.setText("Pénztárcák");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -372,11 +370,10 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                 .addGap(72, 72, 72)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lbOsszesRezsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lbOsszesEgeszseg))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbOsszesRezsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbOsszesEgeszseg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbOsszesEtkezes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -476,9 +473,9 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(tfOsszesEtkezes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbOsszesEtkezes)
                                     .addComponent(lbOsszesKozlekedes)
-                                    .addComponent(tfOsszesKozlekedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfOsszesKozlekedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbOsszesEtkezes))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbOsszesEgeszseg)
@@ -662,6 +659,11 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         bevetelekTabla.clearSelection();
     }//GEN-LAST:event_kiadasokTablaMouseClicked
 
+    private void tablazatFejlecMutatoBeallit(){  
+        bevetelekTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        kiadasokTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+    
     private void tablazatokFeltolt() {
         tablaFeltolt(kiadasokTabla, kiadasokLista);
         tablaFeltolt(bevetelekTabla, bevetelekLista);
@@ -677,7 +679,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         osszesKiadasTipusMezokBeallit();
     }
 
-    private void rendezesiLehetosegBeallit() {
+    private void tablazatRendezesiLehetosegekBeallit() {
         setBevetelTablaFejlecActionListener();
         setKiadasTablaFejlecActionListener();
     }
@@ -1033,8 +1035,6 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private javax.swing.JButton btUjKiadas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable kiadasokTabla;
     private javax.swing.JScrollPane kiadasokTablaTarolo;

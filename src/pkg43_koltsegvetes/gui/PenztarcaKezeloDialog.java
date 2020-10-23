@@ -1,5 +1,6 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -27,6 +28,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         setTitle("Pénztárcák kezelése");
         this.penztarcaIrany = penztarcaIrany;
         this.penztarcaLista = penztarcaLista;
@@ -63,6 +65,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         jLabel2.setText("Elérhető Pénztárcák");
 
         btUjPenztarca.setText("Új pénztárca");
+        btUjPenztarca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btUjPenztarca.setNextFocusableComponent(btModositas);
         btUjPenztarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +74,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         });
 
         btModositas.setText("Módosítás");
+        btModositas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btModositas.setNextFocusableComponent(btOK);
         btModositas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +82,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
             }
         });
 
+        penztarcakTable.setBackground(new java.awt.Color(255, 255, 204));
         penztarcakTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -97,6 +102,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(penztarcakTable);
 
         btOK.setText("OK");
+        btOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btOK.setNextFocusableComponent(btMegsem);
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +111,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         });
 
         btMegsem.setText("Mégsem");
+        btMegsem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMegsem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btMegsemActionPerformed(evt);
@@ -257,7 +264,7 @@ public class PenztarcaKezeloDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PenztarcaKezeloDialog dialog = new PenztarcaKezeloDialog(new javax.swing.JFrame(), true);
+                PenztarcaKezeloDialog dialog = new PenztarcaKezeloDialog(new javax.swing.JFrame(), true);                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

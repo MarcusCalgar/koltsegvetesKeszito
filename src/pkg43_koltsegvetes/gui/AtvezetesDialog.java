@@ -1,5 +1,6 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputVerifier;
@@ -26,6 +27,7 @@ public class AtvezetesDialog extends javax.swing.JDialog {
     public AtvezetesDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista) {
         super(parent, modal);
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         penztarcaValasztoFeltolt(penztarcaLista);
         inputVerifierBeallit();
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
@@ -105,13 +107,16 @@ public class AtvezetesDialog extends javax.swing.JDialog {
 
         lbOsszeg.setText("Összeg");
 
+        cbForrasBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbForrasBox.setNextFocusableComponent(cbCelBox);
 
+        cbCelBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbCelBox.setNextFocusableComponent(tfOsszeg);
 
         tfOsszeg.setNextFocusableComponent(btOK);
 
         btOK.setText("OK");
+        btOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btOK.setNextFocusableComponent(btMegsem);
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +125,7 @@ public class AtvezetesDialog extends javax.swing.JDialog {
         });
 
         btMegsem.setText("Mégsem");
+        btMegsem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMegsem.setNextFocusableComponent(cbForrasBox);
         btMegsem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

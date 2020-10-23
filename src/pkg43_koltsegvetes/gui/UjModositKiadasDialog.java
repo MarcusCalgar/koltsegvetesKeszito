@@ -1,5 +1,6 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -33,6 +34,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.penztarcaLista = penztarcaLista;
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         comboBoxFeltolt();
         inputVerifierBeallit();
@@ -44,6 +46,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         this.setModal(true);
         this.penztarcaLista = penztarcaLista;
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         comboBoxFeltolt();
         inputVerifierBeallit();
@@ -198,6 +201,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         tfOsszeg.setNextFocusableComponent(btOK);
 
         btOK.setText("OK");
+        btOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btOK.setNextFocusableComponent(btMegsem);
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +210,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         });
 
         btMegsem.setText("Mégsem");
+        btMegsem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMegsem.setNextFocusableComponent(jxDatumValaszto);
         btMegsem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,8 +226,10 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         lbIdopont.setText("Időpont");
 
         cbKategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rezsi", "Élelmiszer", "Étkezés", "Egészség", "Közlekedés", "Egyéb" }));
+        cbKategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbKategoria.setNextFocusableComponent(cbVasarlasHelye);
 
+        cbPenztarcak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPenztarcak.setNextFocusableComponent(cbKategoria);
 
         jxDatumValaszto.setNextFocusableComponent(tfMegnevezes);
@@ -232,6 +239,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         tfMegnevezes.setNextFocusableComponent(cbPenztarcak);
 
         cbVasarlasHelye.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Egyéb" }));
+        cbVasarlasHelye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbVasarlasHelye.setNextFocusableComponent(tfOsszeg);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,14 +248,14 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbOsszeg)
-                    .addComponent(lbKategoria)
-                    .addComponent(lbVasarlasHelye)
-                    .addComponent(lbIdopont, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbErintettPenztarca)
-                    .addComponent(lbMegnevezes))
-                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbIdopont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbErintettPenztarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbMegnevezes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbKategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbVasarlasHelye, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbOsszeg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfMegnevezes)
                     .addComponent(jxDatumValaszto, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
@@ -255,7 +263,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
                     .addComponent(cbKategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbVasarlasHelye, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfOsszeg))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btOK, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btMegsem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))

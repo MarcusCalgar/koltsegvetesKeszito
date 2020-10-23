@@ -1,5 +1,6 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -30,6 +31,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.penztarcaLista = penztarcaLista;
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         penztarcaValasztoFeltolt(penztarcaLista);
         inputVerifierBeallit();
@@ -41,6 +43,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         this.setModal(true);
         this.penztarcaLista = penztarcaLista;
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         penztarcaValasztoFeltolt(penztarcaLista);
         inputVerifierBeallit();
@@ -138,6 +141,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btOK.setText("OK");
+        btOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btOK.setNextFocusableComponent(btMegsem);
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +150,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         });
 
         btMegsem.setText("Mégsem");
+        btMegsem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMegsem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btMegsemActionPerformed(evt);
@@ -163,6 +168,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         lbBevetel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbBevetel.setText("Bevétel");
 
+        cbPenztarcak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPenztarcak.setNextFocusableComponent(tfOsszeg);
 
         jLabel2.setText("Megnevezés");
@@ -175,10 +181,6 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(lbBevetel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -197,6 +199,10 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
                     .addComponent(btMegsem, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btOK, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbBevetel)
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +217,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfMegnevezes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPenztarca, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbPenztarcak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

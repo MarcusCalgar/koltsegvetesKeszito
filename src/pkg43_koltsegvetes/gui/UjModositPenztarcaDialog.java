@@ -1,5 +1,6 @@
 package pkg43_koltsegvetes.gui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.InputVerifier;
@@ -28,6 +29,7 @@ public class UjModositPenztarcaDialog extends javax.swing.JDialog {
         this.penztarcaLista = penztarcaLista;
         setTitle("Új pénztárca felvitele");
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         inputVerifierBeallit();
     }
@@ -38,6 +40,7 @@ public class UjModositPenztarcaDialog extends javax.swing.JDialog {
         isModositas = true;
         setTitle("Pénztárca módosítása");
         initComponents();
+        this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         inputVerifierBeallit();
         modositandoAdatokBetolt(tarca);
@@ -150,6 +153,7 @@ public class UjModositPenztarcaDialog extends javax.swing.JDialog {
         tfOsszeg.setNextFocusableComponent(btOK);
 
         btOK.setText("OK");
+        btOK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btOK.setNextFocusableComponent(btMegsem);
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +162,7 @@ public class UjModositPenztarcaDialog extends javax.swing.JDialog {
         });
 
         btMegsem.setText("Mégsem");
+        btMegsem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMegsem.setNextFocusableComponent(tfNev);
         btMegsem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +171,7 @@ public class UjModositPenztarcaDialog extends javax.swing.JDialog {
         });
 
         cbPenztarcaTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Készpénz", "Bankkártya", "Vendéglátás zseb", "Szállás zseb", "Szabadidő zseb", "Megtakarítási számla" }));
+        cbPenztarcaTipus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPenztarcaTipus.setNextFocusableComponent(tfOsszeg);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
