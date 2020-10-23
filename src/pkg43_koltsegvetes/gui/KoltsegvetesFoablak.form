@@ -643,7 +643,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbOsszesEgyeb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xd6;sszes Egy&#xe9;b"/>
+        <Property name="text" type="java.lang.String" value="&#xd6;sszes Egy&#xe9;b Kat."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfOsszesEgyeb">

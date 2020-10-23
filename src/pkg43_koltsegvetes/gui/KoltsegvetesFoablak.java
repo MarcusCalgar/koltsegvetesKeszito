@@ -316,7 +316,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tfOsszesEgeszseg.setEditable(false);
         tfOsszesEgeszseg.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
-        lbOsszesEgyeb.setText("Összes Egyéb");
+        lbOsszesEgyeb.setText("Összes Egyéb Kat.");
 
         tfOsszesEgyeb.setEditable(false);
         tfOsszesEgyeb.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -522,7 +522,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             if (bevetelekTabla.getSelectedRow() != -1) {
                 kijeloltSorSzama = bevetelekTabla.getSelectedRow();
                 kijeloltTranzakcio = bevetelekLista.get(kijeloltSorSzama);
-                UjModositBevetelDialog bevetelModosit = new UjModositBevetelDialog(this, kijeloltTranzakcio, penztarcakLista);
+                UjModositBevetelDialog bevetelModosit = new UjModositBevetelDialog(this, kijeloltTranzakcio, penztarcakLista, bevetelekLista);
                 bevetelModosit.setVisible(true);
                 if (bevetelModosit.isOk()) {
                     bevetelekLista.remove(kijeloltSorSzama);
@@ -535,7 +535,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             } else if (kiadasokTabla.getSelectedRow() != -1) {
                 kijeloltSorSzama = kiadasokTabla.getSelectedRow();
                 kijeloltTranzakcio = kiadasokLista.get(kijeloltSorSzama);
-                UjModositKiadasDialog kiadasModosit = new UjModositKiadasDialog(this, kijeloltTranzakcio, penztarcakLista);
+                UjModositKiadasDialog kiadasModosit = new UjModositKiadasDialog(this, kijeloltTranzakcio, penztarcakLista, kiadasokLista);
                 kiadasModosit.setVisible(true);
                 if (kiadasModosit.isOk()) {
                     kiadasokLista.remove(kijeloltSorSzama);
@@ -554,7 +554,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     }//GEN-LAST:event_btModositActionPerformed
 
     private void btUjBevetelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUjBevetelActionPerformed
-        UjModositBevetelDialog ujBevetel = new UjModositBevetelDialog(this, true, penztarcakLista);
+        UjModositBevetelDialog ujBevetel = new UjModositBevetelDialog(this, true, penztarcakLista, bevetelekLista);
         ujBevetel.setVisible(true);
         if (ujBevetel.isOk()) {
             bevetelekLista.add(ujBevetel.getBevetel());
@@ -573,7 +573,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     }//GEN-LAST:event_btUjBevetelActionPerformed
 
     private void btUjKiadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUjKiadasActionPerformed
-        UjModositKiadasDialog ujKiadas = new UjModositKiadasDialog(this, true, penztarcakLista);
+        UjModositKiadasDialog ujKiadas = new UjModositKiadasDialog(this, true, penztarcakLista, kiadasokLista);
         ujKiadas.setVisible(true);
         if (ujKiadas.isOk()) {
             kiadasokLista.add(ujKiadas.getKiadas());
@@ -785,10 +785,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 case "Egészség":
                     egeszsegOsszeg += kiadas.getOsszeg();
                     break;
-                case "Egyéb":
-                    egyebOsszeg += kiadas.getOsszeg();
-                    break;
                 default:
+                    egyebOsszeg += kiadas.getOsszeg();
                     break;
             }
         }

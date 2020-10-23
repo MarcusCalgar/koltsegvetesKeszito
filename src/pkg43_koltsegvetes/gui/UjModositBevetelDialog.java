@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
@@ -21,34 +22,49 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
     private boolean ok;
     private Integer modositandoBevetelID;
     private List<Penztarca> penztarcaLista;
+    private List<Bevetel> bevetelekLista;
+    DefaultComboBoxModel<String> bevetelMegnevezesekModel = new DefaultComboBoxModel<>();
 
     public UjModositBevetelDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public UjModositBevetelDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista) {
+    public UjModositBevetelDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista, List<Bevetel> bevetelekLista) {
         super(parent, modal);
         this.penztarcaLista = penztarcaLista;
+        this.bevetelekLista = bevetelekLista;
         initComponents();
-        this.getContentPane().setBackground(new Color(212, 232, 255));
-        SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
-        penztarcaValasztoFeltolt(penztarcaLista);
-        inputVerifierBeallit();
+        dialogInicializalas();
         this.setTitle("Új bevétel felvitele");
+
     }
 
-    public UjModositBevetelDialog(java.awt.Frame parent, Tranzakcio bevetelElem, List<Penztarca> penztarcaLista) {
+    public UjModositBevetelDialog(java.awt.Frame parent, Tranzakcio bevetelElem, List<Penztarca> penztarcaLista, List<Bevetel> bevetelekLista) {
         super(parent);
         this.setModal(true);
         this.penztarcaLista = penztarcaLista;
+        this.bevetelekLista = bevetelekLista;
         initComponents();
+        dialogInicializalas();
+        this.setTitle("Bevétel módosítása");
+        modositandoBevetelAdatokBeallit(bevetelElem);
+
+    }
+
+    private void dialogInicializalas() {
         this.getContentPane().setBackground(new Color(212, 232, 255));
         SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
         penztarcaValasztoFeltolt(penztarcaLista);
         inputVerifierBeallit();
-        this.setTitle("Bevétel módosítása");
-        modositandoBevetelAdatokBeallit(bevetelElem);
+        bevetelMegnevezesekModelFeltolt();
+        cbBevetelMegnevezesek.setModel(bevetelMegnevezesekModel);
+    }
+
+    private void bevetelMegnevezesekModelFeltolt() {
+        for (Bevetel bevetel : bevetelekLista) {
+            bevetelMegnevezesekModel.addElement(bevetel.getMegnevezes());
+        }
     }
 
     public boolean isOk() {
@@ -59,14 +75,14 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         Bevetel bevetel = (Bevetel) bevetelElem;
         modositandoBevetelID = bevetel.getId();
         jxDatumValaszto.setDate(Date.from(bevetel.getDatum().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        tfMegnevezes.setText(bevetel.getMegnevezes());
+        cbBevetelMegnevezesek.setSelectedItem(bevetel.getMegnevezes());
         cbPenztarcak.setSelectedItem(bevetel.getErintettPenztarca().getNev());
         tfOsszeg.setText(bevetel.getOsszeg() + "");
     }
 
     private void inputVerifierBeallit() {
         Bevetel ellenorzo = new Bevetel();
-        tfMegnevezes.setInputVerifier(new InputVerifier() {
+        cbBevetelMegnevezesek.setInputVerifier(new InputVerifier() {
             @Override
             public boolean verify(JComponent input) {
                 String megnevezes = ((JTextField) input).getText();
@@ -96,10 +112,10 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
 
     public Bevetel getBevetel() {
         LocalDate datum = LocalDate.from(jxDatumValaszto.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        String megnevezes = tfMegnevezes.getText();
+        String megnevezes = cbBevetelMegnevezesek.getSelectedItem().toString();
         Penztarca penztarca = penztarcaKeres(cbPenztarcak.getSelectedItem().toString());
         int osszeg = Integer.parseInt(tfOsszeg.getText());
-        return new Bevetel(modositandoBevetelID ,datum, megnevezes, penztarca, osszeg);
+        return new Bevetel(modositandoBevetelID, datum, megnevezes, penztarca, osszeg);
     }
 
     private void penztarcaValasztoFeltolt(List<Penztarca> penztarcaLista) {
@@ -133,8 +149,8 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
         lbBevetel = new javax.swing.JLabel();
         cbPenztarcak = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        tfMegnevezes = new javax.swing.JTextField();
         jxDatumValaszto = new org.jdesktop.swingx.JXDatePicker();
+        cbBevetelMegnevezesek = new javax.swing.JComboBox<>();
 
         jLabel1.setText("jLabel1");
 
@@ -173,9 +189,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Megnevezés");
 
-        tfMegnevezes.setNextFocusableComponent(cbPenztarcak);
-
-        jxDatumValaszto.setNextFocusableComponent(tfMegnevezes);
+        cbBevetelMegnevezesek.setEditable(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,17 +197,17 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lbPenztarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(lbIdopont, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbPenztarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(lbIdopont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbOsszeg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfOsszeg)
                     .addComponent(cbPenztarcak, javax.swing.GroupLayout.Alignment.TRAILING, 0, 127, Short.MAX_VALUE)
-                    .addComponent(tfMegnevezes, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jxDatumValaszto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jxDatumValaszto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbBevetelMegnevezesek, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btMegsem, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +230,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMegnevezes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbBevetelMegnevezesek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPenztarca, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,6 +309,7 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btMegsem;
     private javax.swing.JButton btOK;
+    private javax.swing.JComboBox<String> cbBevetelMegnevezesek;
     private javax.swing.JComboBox<String> cbPenztarcak;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -303,7 +318,6 @@ public class UjModositBevetelDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lbIdopont;
     private javax.swing.JLabel lbOsszeg;
     private javax.swing.JLabel lbPenztarca;
-    private javax.swing.JTextField tfMegnevezes;
     private javax.swing.JTextField tfOsszeg;
     // End of variables declaration//GEN-END:variables
 }

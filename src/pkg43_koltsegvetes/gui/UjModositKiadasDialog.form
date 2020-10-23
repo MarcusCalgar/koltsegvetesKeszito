@@ -33,7 +33,7 @@
                   <Component id="lbVasarlasHelye" alignment="0" max="32767" attributes="0"/>
                   <Component id="lbOsszeg" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="tfMegnevezes" alignment="0" max="32767" attributes="0"/>
                   <Component id="jxDatumValaszto" alignment="0" pref="135" max="32767" attributes="0"/>
@@ -169,15 +169,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbKategoria">
       <Properties>
+        <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
-            <StringItem index="0" value="Rezsi"/>
-            <StringItem index="1" value="&#xc9;lelmiszer"/>
-            <StringItem index="2" value="&#xc9;tkez&#xe9;s"/>
-            <StringItem index="3" value="Eg&#xe9;szs&#xe9;g"/>
-            <StringItem index="4" value="K&#xf6;zleked&#xe9;s"/>
-            <StringItem index="5" value="Egy&#xe9;b"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
@@ -227,10 +221,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbVasarlasHelye">
       <Properties>
+        <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="Egy&#xe9;b"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>

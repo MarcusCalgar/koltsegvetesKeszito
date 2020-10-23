@@ -20,44 +20,48 @@ import pkg43_koltsegvetes.model.Penztarca;
 import pkg43_koltsegvetes.model.Tranzakcio;
 
 public class UjModositKiadasDialog extends javax.swing.JDialog {
-
+    
     private boolean ok;
     private Integer modositandoKiadasID;
     private List<Penztarca> penztarcaLista;
-
+    private List<Kiadas> kiadasokLista;
+    private DefaultComboBoxModel<String> kategoriaCBModel = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<String> kiadasHelyCBModel = new DefaultComboBoxModel<>();
+    
     public UjModositKiadasDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
-    public UjModositKiadasDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista) {
+    
+    public UjModositKiadasDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
         super(parent, modal);
-        this.penztarcaLista = penztarcaLista;
         initComponents();
-        this.getContentPane().setBackground(new Color(212, 232, 255));
-        SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
-        comboBoxFeltolt();
-        inputVerifierBeallit();
+        dialogInicializalas(penztarcaLista, kiadasokLista);
         this.setTitle("Új kiadás felvitele");
     }
-
-    public UjModositKiadasDialog(java.awt.Frame parent, Tranzakcio kiadasElem, List<Penztarca> penztarcaLista) {
+    
+    public UjModositKiadasDialog(java.awt.Frame parent, Tranzakcio kiadasElem, List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
         super(parent);
         this.setModal(true);
-        this.penztarcaLista = penztarcaLista;
-        initComponents();
-        this.getContentPane().setBackground(new Color(212, 232, 255));
-        SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
-        comboBoxFeltolt();
-        inputVerifierBeallit();
+        initComponents();        
+        dialogInicializalas(penztarcaLista, kiadasokLista);
         this.setTitle("Kiadás módosítása");
         modositandoKiadasAdatokBetolt(kiadasElem);
     }
-
+    
     public boolean isOk() {
         return ok;
     }
-
+    
+    private void dialogInicializalas(List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
+        this.penztarcaLista = penztarcaLista;
+        this.kiadasokLista = kiadasokLista;
+        this.getContentPane().setBackground(new Color(212, 232, 255));
+        SwingUtilities.getRootPane(btOK).setDefaultButton(btOK);
+        legorduloMenukFeltolt();
+        inputVerifierBeallit();
+    }
+    
     private void modositandoKiadasAdatokBetolt(Tranzakcio kiadasElem) {
         Kiadas kiadas = (Kiadas) kiadasElem;
         modositandoKiadasID = kiadas.getId();
@@ -68,7 +72,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         cbVasarlasHelye.setSelectedItem(kiadas.getKiadasHely());
         tfOsszeg.setText(kiadas.getOsszeg() + "");
     }
-
+    
     private void inputVerifierBeallit() {
         Kiadas ellenorzo = new Kiadas();
         tfMegnevezes.setInputVerifier(new InputVerifier() {
@@ -124,25 +128,42 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             }
         });
     }
-
-    private void comboBoxFeltolt() {
+    
+    private void legorduloMenukFeltolt() {
         penztarcaValasztoFeltolt(penztarcaLista);
-        szerkeszthetoComboBoxKeszit(cbKategoria);
-        szerkeszthetoComboBoxKeszit(cbVasarlasHelye);
+        kategoriaCBBeallit();
+        szerkeszthetoLegorduloMenuKeszit(cbKategoria);
     }
-
-    private void szerkeszthetoComboBoxKeszit(JComboBox<String> box) {
-        box.setEditable(true);
+    
+    // A metódus a Kategória menü váltásakor újratölti a Vásárlási hely legördülő menü elemeit
+    private void szerkeszthetoLegorduloMenuKeszit(JComboBox<String> box) {
         box.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ("comboBoxEdited".equals(e.getActionCommand())) {
-                    box.addItem(box.getSelectedItem().toString());
+                if ("comboBoxChanged".equals(e.getActionCommand())) {
+                    kiadasHelyekCBBeallit(box.getSelectedItem().toString());
+                    cbVasarlasHelye.setModel(kiadasHelyCBModel);
                 }
             }
         });
     }
-
+    
+    private void kategoriaCBBeallit() {
+        for (Kiadas kiadas : kiadasokLista) {
+            kategoriaCBModel.addElement(kiadas.getKategoria());
+        }
+        cbKategoria.setModel(kategoriaCBModel);
+    }
+    
+    private void kiadasHelyekCBBeallit(String kategoria) {
+        kiadasHelyCBModel.removeAllElements();
+        for (Kiadas kiadas : kiadasokLista) {
+            if (kiadas.getKategoria().equals(kategoria)) {
+                kiadasHelyCBModel.addElement(kiadas.getKiadasHely());
+            }
+        }
+    }
+    
     public Kiadas getKiadas() {
         LocalDate datum = LocalDate.from(jxDatumValaszto.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         String megnevezes = tfMegnevezes.getText();
@@ -152,7 +173,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         int osszeg = Integer.parseInt(tfOsszeg.getText());
         return new Kiadas(modositandoKiadasID, datum, megnevezes, penztarca, kategoria, vasarlasHelye, osszeg);
     }
-
+    
     private void penztarcaValasztoFeltolt(List<Penztarca> penztarcaLista) {
         String[] penztarcaNevek = new String[penztarcaLista.size()];
         for (int i = 0; i < penztarcaNevek.length; i++) {
@@ -160,7 +181,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         }
         cbPenztarcak.setModel(new DefaultComboBoxModel<>(penztarcaNevek));
     }
-
+    
     private Penztarca penztarcaKeres(String nev) {
         for (Penztarca tarca : penztarcaLista) {
             if (tarca.getNev().equals(nev)) {
@@ -169,7 +190,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         }
         return null;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,7 +246,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
 
         lbIdopont.setText("Időpont");
 
-        cbKategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rezsi", "Élelmiszer", "Étkezés", "Egészség", "Közlekedés", "Egyéb" }));
+        cbKategoria.setEditable(true);
         cbKategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbKategoria.setNextFocusableComponent(cbVasarlasHelye);
 
@@ -238,7 +259,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
 
         tfMegnevezes.setNextFocusableComponent(cbPenztarcak);
 
-        cbVasarlasHelye.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Egyéb" }));
+        cbVasarlasHelye.setEditable(true);
         cbVasarlasHelye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbVasarlasHelye.setNextFocusableComponent(tfOsszeg);
 
@@ -255,7 +276,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
                     .addComponent(lbKategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbVasarlasHelye, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbOsszeg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfMegnevezes)
                     .addComponent(jxDatumValaszto, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
