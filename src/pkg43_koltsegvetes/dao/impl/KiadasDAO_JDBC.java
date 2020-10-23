@@ -23,10 +23,10 @@ public class KiadasDAO_JDBC extends KoltsegvetesDAO_JDBC<Kiadas> {
     public KiadasDAO_JDBC(Connection kapcsolat, List<Penztarca> penztarcaLista) throws KoltsegvetesException {
         try {
             this.penztarcaLista = penztarcaLista;
-            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes_test.kiadasok");
-            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes_test.kiadasok (datum, erintettPenztarca, megnevezes, kategoria, kiadasHelye, osszeg) VALUES (?,?,?,?,?,?)");
-            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes_test.kiadasok SET datum = ?, erintettPenztarca = ?, megnevezes = ?, kategoria = ?, kiadasHelye = ?, osszeg = ? WHERE id = ?");
-            this.torol = kapcsolat.prepareStatement("DELETE FROM koltsegvetes_test.kiadasok WHERE id=?");
+            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes.kiadasok");
+            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes.kiadasok (datum, erintettPenztarca, megnevezes, kategoria, kiadasHelye, osszeg) VALUES (?,?,?,?,?,?)");
+            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes.kiadasok SET datum = ?, erintettPenztarca = ?, megnevezes = ?, kategoria = ?, kiadasHelye = ?, osszeg = ? WHERE id = ?");
+            this.torol = kapcsolat.prepareStatement("DELETE FROM koltsegvetes.kiadasok WHERE id=?");
         } catch (SQLException ex) {
             throw new KoltsegvetesException(ex.getMessage());
         }

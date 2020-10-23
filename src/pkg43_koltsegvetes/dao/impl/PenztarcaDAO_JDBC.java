@@ -24,9 +24,9 @@ public class PenztarcaDAO_JDBC extends KoltsegvetesDAO_JDBC<Penztarca> {
      */
     public PenztarcaDAO_JDBC(Connection kapcsolat) throws KoltsegvetesException {
         try {
-            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes_test.penztarcak");
-            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes_test.penztarcak (nev, tipus, osszeg) VALUES (?,?,?)");
-            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes_test.penztarcak SET nev = ?, tipus = ?, osszeg = ? WHERE id = ?");
+            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes.penztarcak");
+            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes.penztarcak (nev, tipus, osszeg) VALUES (?,?,?)");
+            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes.penztarcak SET nev = ?, tipus = ?, osszeg = ? WHERE id = ?");
         } catch (SQLException ex) {
             throw new KoltsegvetesException(ex.getMessage());
         }

@@ -23,10 +23,10 @@ public class BevetelDAO_JDBC extends KoltsegvetesDAO_JDBC<Bevetel> {
     public BevetelDAO_JDBC(Connection kapcsolat, List<Penztarca> penztarcaLista) throws KoltsegvetesException {
         try {
             this.penztarcaLista = penztarcaLista;
-            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes_test.bevetelek");
-            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes_test.bevetelek (datum, erintettPenztarca, megnevezes, osszeg) VALUES (?,?,?,?)");
-            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes_test.bevetelek SET datum = ?, erintettPenztarca = ?, megnevezes = ?, osszeg = ? WHERE id = ?");
-            this.torol = kapcsolat.prepareStatement("DELETE FROM koltsegvetes_test.bevetelek WHERE id=?");
+            this.osszesBetolt = kapcsolat.prepareStatement("SELECT * FROM koltsegvetes.bevetelek");
+            this.beilleszt = kapcsolat.prepareStatement("INSERT INTO koltsegvetes.bevetelek (datum, erintettPenztarca, megnevezes, osszeg) VALUES (?,?,?,?)");
+            this.felulir = kapcsolat.prepareStatement("UPDATE koltsegvetes.bevetelek SET datum = ?, erintettPenztarca = ?, megnevezes = ?, osszeg = ? WHERE id = ?");
+            this.torol = kapcsolat.prepareStatement("DELETE FROM koltsegvetes.bevetelek WHERE id=?");
         } catch (SQLException ex) {
             throw new KoltsegvetesException(ex.getMessage());
         }

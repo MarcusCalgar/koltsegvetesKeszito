@@ -38,7 +38,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     public KoltsegvetesFoablak() {        
         initComponents();        
         try {
-            kapcsolat = DriverManager.getConnection("jdbc:mysql://localhost:3306/koltsegvetes_test?useSSL=false", "root", "1234");
+            kapcsolat = DriverManager.getConnection("jdbc:mysql://localhost:3306/koltsegvetes?useSSL=false", "root", "1234");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }
