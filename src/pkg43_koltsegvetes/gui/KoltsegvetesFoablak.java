@@ -8,13 +8,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import pkg43_filter.*;
 import pkg43_koltsegvetes.comparator.*;
 import pkg43_koltsegvetes.dao.impl.*;
 import pkg43_koltsegvetes.exception.KoltsegvetesException;
@@ -46,9 +49,9 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             penztarcaIrany = new PenztarcaDAO_JDBC(kapcsolat);
             penztarcakLista = penztarcaIrany.osszesBetolt();
             bevetelIrany = new BevetelDAO_JDBC(kapcsolat, penztarcakLista);
-            bevetelekLista = bevetelIrany.osszesBetolt();
+            bevetelekLista = bevetelIrany.osszesBetolt().stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
             kiadasIrany = new KiadasDAO_JDBC(kapcsolat, penztarcakLista);
-            kiadasokLista = kiadasIrany.osszesBetolt();
+            kiadasokLista = kiadasIrany.osszesBetolt().stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
         } catch (KoltsegvetesException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }

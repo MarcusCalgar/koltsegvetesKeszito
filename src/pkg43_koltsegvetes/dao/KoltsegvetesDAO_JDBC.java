@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pkg43_koltsegvetes.dao.KoltsegvetesDAO;
 import pkg43_koltsegvetes.exception.KoltsegvetesException;
 import pkg43_koltsegvetes.model.Penztarca;
 import pkg43_koltsegvetes.model.Tranzakcio;
