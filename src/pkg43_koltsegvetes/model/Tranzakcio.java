@@ -63,7 +63,7 @@ public abstract class Tranzakcio {
     }
 
     public void megnevezesEllenorzo(String nev) throws KoltsegvetesException {
-        if (!nev.matches("[a-zA-Z0-9 _áéíóöőúűÁÉÍÓÖŐÜŰ]+")) {
+        if (!nev.matches("[a-zA-Z0-9 _áéíóúöőüűÁÉÍÓÚÖŐÜŰ]+")) {
             throw new KoltsegvetesException("Megnevezés megadása kötelező.\nA megnevezés csak betűket, számokat, szóközt, és alulvonás jelet tartalmazhat!");
         }        
     }

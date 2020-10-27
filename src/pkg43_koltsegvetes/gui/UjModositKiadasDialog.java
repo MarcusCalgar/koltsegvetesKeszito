@@ -70,7 +70,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         tfMegnevezes.setText(kiadas.getMegnevezes());
         cbPenztarcak.setSelectedItem(kiadas.getErintettPenztarca().getNev());
         cbKategoria.setSelectedItem(kiadas.getKategoria());
-        cbVasarlasHelye.setSelectedItem(kiadas.getKiadasHely());
+        cbKiadasHely.setSelectedItem(kiadas.getKiadasHely());
         tfOsszeg.setText(kiadas.getOsszeg() + "");
     }
 
@@ -102,7 +102,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
                 }
             }
         });
-        cbVasarlasHelye.setInputVerifier(new InputVerifier() {
+        cbKiadasHely.setInputVerifier(new InputVerifier() {
             @Override
             public boolean verify(JComponent input) {
                 String kiadasHely = ((JComboBox<String>) input).getSelectedItem().toString();
@@ -143,7 +143,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
                 if ("comboBoxChanged".equals(e.getActionCommand())) {
                     kiadasHelyekCBBeallit(box.getSelectedItem().toString());
-                    cbVasarlasHelye.setModel(kiadasHelyCBModel);
+                    cbKiadasHely.setModel(kiadasHelyCBModel);
                 }
             }
         });
@@ -160,12 +160,15 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
     }
 
     private void kiadasHelyekCBBeallit(String kategoria) {
+        HashSet ideiglenesSet = new HashSet();
         kiadasHelyCBModel.removeAllElements();
         for (Kiadas kiadas : kiadasokLista) {
             if (kiadas.getKategoria().equals(kategoria)) {
-                kiadasHelyCBModel.addElement(kiadas.getKiadasHely());
+                ideiglenesSet.add(kiadas.getKiadasHely());
             }
         }
+        ideiglenesSet.forEach(vasarlasiHely -> kiadasHelyCBModel.addElement(vasarlasiHely.toString()));
+        cbKiadasHely.setModel(kiadasHelyCBModel);
     }
 
     public Kiadas getKiadas() {
@@ -173,7 +176,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         String megnevezes = tfMegnevezes.getText();
         Penztarca penztarca = penztarcaKeres(cbPenztarcak.getSelectedItem().toString());
         String kategoria = cbKategoria.getSelectedItem().toString();
-        String vasarlasHelye = cbVasarlasHelye.getSelectedItem().toString();
+        String vasarlasHelye = cbKiadasHely.getSelectedItem().toString();
         int osszeg = Integer.parseInt(tfOsszeg.getText());
         return new Kiadas(modositandoKiadasID, datum, megnevezes, penztarca, kategoria, vasarlasHelye, osszeg);
     }
@@ -213,7 +216,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         jxDatumValaszto = new org.jdesktop.swingx.JXDatePicker();
         lbMegnevezes = new javax.swing.JLabel();
         tfMegnevezes = new javax.swing.JTextField();
-        cbVasarlasHelye = new javax.swing.JComboBox<>();
+        cbKiadasHely = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -252,7 +255,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
 
         cbKategoria.setEditable(true);
         cbKategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cbKategoria.setNextFocusableComponent(cbVasarlasHelye);
+        cbKategoria.setNextFocusableComponent(cbKiadasHely);
 
         cbPenztarcak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPenztarcak.setNextFocusableComponent(cbKategoria);
@@ -263,9 +266,9 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
 
         tfMegnevezes.setNextFocusableComponent(cbPenztarcak);
 
-        cbVasarlasHelye.setEditable(true);
-        cbVasarlasHelye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cbVasarlasHelye.setNextFocusableComponent(tfOsszeg);
+        cbKiadasHely.setEditable(true);
+        cbKiadasHely.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbKiadasHely.setNextFocusableComponent(tfOsszeg);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,7 +289,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
                     .addComponent(jxDatumValaszto, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addComponent(cbPenztarcak, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbKategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbVasarlasHelye, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbKiadasHely, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfOsszeg))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +326,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbVasarlasHelye)
                     .addComponent(btOK)
-                    .addComponent(cbVasarlasHelye, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbKiadasHely, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbOsszeg)
@@ -398,8 +401,8 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
     private javax.swing.JButton btMegsem;
     private javax.swing.JButton btOK;
     private javax.swing.JComboBox<String> cbKategoria;
+    private javax.swing.JComboBox<String> cbKiadasHely;
     private javax.swing.JComboBox<String> cbPenztarcak;
-    private javax.swing.JComboBox<String> cbVasarlasHelye;
     private org.jdesktop.swingx.JXDatePicker jxDatumValaszto;
     private javax.swing.JLabel lbErintettPenztarca;
     private javax.swing.JLabel lbIdopont;
