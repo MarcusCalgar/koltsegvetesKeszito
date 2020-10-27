@@ -34,12 +34,14 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private KiadasDAO_JDBC kiadasIrany;
     private List<Penztarca> penztarcakLista = new ArrayList<>();
     private List<Bevetel> bevetelekLista = new ArrayList<>();
+    private List<Bevetel> megszurtBevetelLista = new ArrayList<>();
     private List<Kiadas> kiadasokLista = new ArrayList<>();
+    private List<Kiadas> megszurtKiadasokLista = new ArrayList<>();
     private Tranzakcio kijeloltTranzakcio;
     private DecimalFormat szamFormazo = new DecimalFormat("###,### Ft");
 
-    public KoltsegvetesFoablak() {        
-        initComponents();        
+    public KoltsegvetesFoablak() {
+        initComponents();
         try {
             kapcsolat = DriverManager.getConnection("jdbc:mysql://localhost:3306/koltsegvetes?useSSL=false", "root", "1234");
         } catch (SQLException e) {
@@ -49,13 +51,14 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             penztarcaIrany = new PenztarcaDAO_JDBC(kapcsolat);
             penztarcakLista = penztarcaIrany.osszesBetolt();
             bevetelIrany = new BevetelDAO_JDBC(kapcsolat, penztarcakLista);
-            bevetelekLista = bevetelIrany.osszesBetolt().stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
+            bevetelekLista = bevetelIrany.osszesBetolt();
             kiadasIrany = new KiadasDAO_JDBC(kapcsolat, penztarcakLista);
-            kiadasokLista = kiadasIrany.osszesBetolt().stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
+            kiadasokLista = kiadasIrany.osszesBetolt();
         } catch (KoltsegvetesException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Adatbázis kapcsolat hiba!", JOptionPane.OK_OPTION);
         }
         this.getContentPane().setBackground(new Color(212, 232, 255));
+        szuresBeallit();
         tablazatFejlecMutatoBeallit();
         tablazatRendezesiLehetosegekBeallit();
         tablazatokFeltolt();
@@ -561,8 +564,9 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         ujBevetel.setVisible(true);
         if (ujBevetel.isOk()) {
             bevetelekLista.add(ujBevetel.getBevetel());
+            szuresBeallit();
             bevetelHozzaadasaPenztarcahoz(ujBevetel.getBevetel());
-            tablaFeltolt(bevetelekTabla, bevetelekLista);
+            tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
             tablaFeltolt(penztarcakTable, penztarcakLista);
             bevetelAdatbazisbaMent(ujBevetel.getBevetel());
             penztarcaAdatbazisbaMent(ujBevetel.getBevetel().getErintettPenztarca());
@@ -580,8 +584,9 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         ujKiadas.setVisible(true);
         if (ujKiadas.isOk()) {
             kiadasokLista.add(ujKiadas.getKiadas());
+            szuresBeallit();
             kiadasLevonasaPenztarcabol(ujKiadas.getKiadas());
-            tablaFeltolt(kiadasokTabla, kiadasokLista);
+            tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
             tablaFeltolt(penztarcakTable, penztarcakLista);
             kiadasAdatbazisbaMent(ujKiadas.getKiadas());
             penztarcaAdatbazisbaMent(ujKiadas.getKiadas().getErintettPenztarca());
@@ -662,14 +667,19 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         bevetelekTabla.clearSelection();
     }//GEN-LAST:event_kiadasokTablaMouseClicked
 
-    private void tablazatFejlecMutatoBeallit(){  
+    private void tablazatFejlecMutatoBeallit() {
         bevetelekTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         kiadasokTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
-    
+
+    private void szuresBeallit() {
+        megszurtKiadasokLista = kiadasokLista.stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
+        megszurtBevetelLista = bevetelekLista.stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
+    }
+
     private void tablazatokFeltolt() {
-        tablaFeltolt(kiadasokTabla, kiadasokLista);
-        tablaFeltolt(bevetelekTabla, bevetelekLista);
+        tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
+        tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
         tablaFeltolt(penztarcakTable, penztarcakLista);
     }
 
@@ -771,7 +781,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
 
     private void osszesKiadasTipusMezokBeallit() {
         int rezsiOsszeg = 0, elelmiszerOsszeg = 0, etkezesOsszeg = 0, kozlekedesOsszeg = 0, egeszsegOsszeg = 0, egyebOsszeg = 0;
-        for (Kiadas kiadas : kiadasokLista) {
+        for (Kiadas kiadas : megszurtKiadasokLista) {
             switch (kiadas.getKategoria()) {
                 case "Rezsi":
                     rezsiOsszeg += kiadas.getOsszeg();
@@ -809,7 +819,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
 
     private void osszesBevetelMezoBeallit() {
         int osszeg = 0;
-        for (Bevetel bevetel : bevetelekLista) {
+        for (Bevetel bevetel : megszurtBevetelLista) {
             osszeg += bevetel.getOsszeg();
         }
         mezoBeallit(tfOsszesBevetel, osszeg);
