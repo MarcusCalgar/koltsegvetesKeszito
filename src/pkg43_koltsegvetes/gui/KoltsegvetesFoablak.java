@@ -684,7 +684,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         setKiadasTablaFejlecActionListener();
     }
 
-    //Action listener a bevételek táblához
+    //Sorrendezési action listener a bevételek táblához
     private void setBevetelTablaFejlecActionListener() {
         bevetelekTabla.getTableHeader().addMouseListener(new MouseAdapter() {
             DatumComparator datumComp = new DatumComparator();
@@ -720,7 +720,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         });
     }
 
-    //Action listener a kivételek táblához
+    //Sorrendezési action listener a kivételek táblához
     private void setKiadasTablaFejlecActionListener() {
         kiadasokTabla.getTableHeader().addMouseListener(new MouseAdapter() {
             DatumComparator datumComp = new DatumComparator();
@@ -954,7 +954,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             ujSor[0] = bevetel.getDatum();
             ujSor[1] = bevetel.getErintettPenztarca().getNev();
             ujSor[2] = bevetel.getMegnevezes();
-            ujSor[3] = bevetel.getOsszeg();
+            ujSor[3] = szamFormazo.format(bevetel.getOsszeg());
             return ujSor;
         } else {
             Object[] ujSor = new Object[kiadasokTablaOszlopSzam];
@@ -964,7 +964,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             ujSor[2] = kiadas.getMegnevezes();
             ujSor[3] = kiadas.getKategoria();
             ujSor[4] = kiadas.getKiadasHely();
-            ujSor[5] = kiadas.getOsszeg();
+            ujSor[5] = szamFormazo.format(kiadas.getOsszeg());
             return ujSor;
         }
     }

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputVerifier;
@@ -20,39 +21,39 @@ import pkg43_koltsegvetes.model.Penztarca;
 import pkg43_koltsegvetes.model.Tranzakcio;
 
 public class UjModositKiadasDialog extends javax.swing.JDialog {
-    
+
     private boolean ok;
     private Integer modositandoKiadasID;
     private List<Penztarca> penztarcaLista;
     private List<Kiadas> kiadasokLista;
     private DefaultComboBoxModel<String> kategoriaCBModel = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<String> kiadasHelyCBModel = new DefaultComboBoxModel<>();
-    
+
     public UjModositKiadasDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public UjModositKiadasDialog(java.awt.Frame parent, boolean modal, List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
         super(parent, modal);
         initComponents();
         dialogInicializalas(penztarcaLista, kiadasokLista);
         this.setTitle("Új kiadás felvitele");
     }
-    
+
     public UjModositKiadasDialog(java.awt.Frame parent, Tranzakcio kiadasElem, List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
         super(parent);
         this.setModal(true);
-        initComponents();        
+        initComponents();
         dialogInicializalas(penztarcaLista, kiadasokLista);
         this.setTitle("Kiadás módosítása");
         modositandoKiadasAdatokBetolt(kiadasElem);
     }
-    
+
     public boolean isOk() {
         return ok;
     }
-    
+
     private void dialogInicializalas(List<Penztarca> penztarcaLista, List<Kiadas> kiadasokLista) {
         this.penztarcaLista = penztarcaLista;
         this.kiadasokLista = kiadasokLista;
@@ -61,7 +62,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         legorduloMenukFeltolt();
         inputVerifierBeallit();
     }
-    
+
     private void modositandoKiadasAdatokBetolt(Tranzakcio kiadasElem) {
         Kiadas kiadas = (Kiadas) kiadasElem;
         modositandoKiadasID = kiadas.getId();
@@ -72,7 +73,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         cbVasarlasHelye.setSelectedItem(kiadas.getKiadasHely());
         tfOsszeg.setText(kiadas.getOsszeg() + "");
     }
-    
+
     private void inputVerifierBeallit() {
         Kiadas ellenorzo = new Kiadas();
         tfMegnevezes.setInputVerifier(new InputVerifier() {
@@ -128,13 +129,13 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void legorduloMenukFeltolt() {
         penztarcaValasztoFeltolt(penztarcaLista);
         kategoriaCBBeallit();
         szerkeszthetoLegorduloMenuKeszit(cbKategoria);
     }
-    
+
     // A metódus a Kategória menü váltásakor újratölti a Vásárlási hely legördülő menü elemeit
     private void szerkeszthetoLegorduloMenuKeszit(JComboBox<String> box) {
         box.addActionListener(new ActionListener() {
@@ -147,14 +148,17 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void kategoriaCBBeallit() {
+        HashSet ideiglenesSet = new HashSet();
         for (Kiadas kiadas : kiadasokLista) {
-            kategoriaCBModel.addElement(kiadas.getKategoria());
+            ideiglenesSet.add(kiadas.getKategoria());
         }
+        ideiglenesSet.forEach(kategoria
+                -> kategoriaCBModel.addElement(kategoria.toString()));
         cbKategoria.setModel(kategoriaCBModel);
     }
-    
+
     private void kiadasHelyekCBBeallit(String kategoria) {
         kiadasHelyCBModel.removeAllElements();
         for (Kiadas kiadas : kiadasokLista) {
@@ -163,7 +167,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public Kiadas getKiadas() {
         LocalDate datum = LocalDate.from(jxDatumValaszto.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         String megnevezes = tfMegnevezes.getText();
@@ -173,7 +177,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         int osszeg = Integer.parseInt(tfOsszeg.getText());
         return new Kiadas(modositandoKiadasID, datum, megnevezes, penztarca, kategoria, vasarlasHelye, osszeg);
     }
-    
+
     private void penztarcaValasztoFeltolt(List<Penztarca> penztarcaLista) {
         String[] penztarcaNevek = new String[penztarcaLista.size()];
         for (int i = 0; i < penztarcaNevek.length; i++) {
@@ -181,7 +185,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         }
         cbPenztarcak.setModel(new DefaultComboBoxModel<>(penztarcaNevek));
     }
-    
+
     private Penztarca penztarcaKeres(String nev) {
         for (Penztarca tarca : penztarcaLista) {
             if (tarca.getNev().equals(nev)) {
@@ -190,7 +194,7 @@ public class UjModositKiadasDialog extends javax.swing.JDialog {
         }
         return null;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
