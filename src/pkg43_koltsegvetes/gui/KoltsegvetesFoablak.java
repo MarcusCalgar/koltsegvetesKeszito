@@ -11,7 +11,9 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,7 +27,7 @@ import pkg43_koltsegvetes.exception.KoltsegvetesException;
 import pkg43_koltsegvetes.model.*;
 
 public class KoltsegvetesFoablak extends javax.swing.JFrame {
-
+    
     private Connection kapcsolat;
     private int penztarcaTablaOszlopSzam = 3;
     private int bevetelekTablaOszlopSzam = 4;
@@ -41,7 +43,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private Tranzakcio kijeloltTranzakcio;
     private DecimalFormat szamFormazo = new DecimalFormat("###,### Ft");
     private Month mutatandoHonap = LocalDate.now().getMonth();
-
+    private Comparator aktualisKiadasRendezes;
+    
     public KoltsegvetesFoablak() {
         initComponents();
         try {
@@ -66,7 +69,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tablazatokFeltolt();
         osszegzoMezokBeallit();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -501,7 +504,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                                 .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -531,22 +534,16 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                                     .addComponent(tfOsszesRezsi, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfOsszesEgeszseg, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbOsszesKozlekedes)
-                                            .addComponent(lbOsszesElelmiszer))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tfOsszesElelmiszer, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 1, Short.MAX_VALUE))
-                                            .addComponent(tfOsszesKozlekedes)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbOsszesEgyeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfOsszesEgyeb, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(kiadasokTablaTarolo))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lbOsszesEgyeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbOsszesKozlekedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbOsszesElelmiszer, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfOsszesKozlekedes)
+                                    .addComponent(tfOsszesElelmiszer)
+                                    .addComponent(tfOsszesEgyeb)))
+                            .addComponent(kiadasokTablaTarolo, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbOsszesVagyon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -591,11 +588,11 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(kiadasokTablaTarolo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                            .addComponent(bevetelekTablaTarolo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                            .addComponent(bevetelekTablaTarolo)
+                            .addComponent(kiadasokTablaTarolo))
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -672,12 +669,14 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         if (bevetelekTabla.getSelectedRow() != -1 || kiadasokTabla.getSelectedRow() != -1) {
             if (bevetelekTabla.getSelectedRow() != -1) {
                 kijeloltSorSzama = bevetelekTabla.getSelectedRow();
-                kijeloltTranzakcio = bevetelekLista.get(kijeloltSorSzama);
-                UjModositBevetelDialog bevetelModosit = new UjModositBevetelDialog(this, kijeloltTranzakcio, penztarcakLista, bevetelekLista);
+                kijeloltTranzakcio = megszurtBevetelLista.get(kijeloltSorSzama);
+                UjModositBevetelDialog bevetelModosit = new UjModositBevetelDialog(this, kijeloltTranzakcio, penztarcakLista, megszurtBevetelLista);
                 bevetelModosit.setVisible(true);
                 if (bevetelModosit.isOk()) {
-                    bevetelekLista.remove(kijeloltSorSzama);
+                    megszurtBevetelLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
+                    bevetelekLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
                     bevetelekLista.add(kijeloltSorSzama, bevetelModosit.getBevetel());
+                    megszurtBevetelLista.add(kijeloltSorSzama, bevetelModosit.getBevetel());
                     bevetelAdatbazisbaMent(bevetelModosit.getBevetel());
                     penztarcaOsszegModositasBevetelEseten(bevetelModosit.getBevetel());
                     penztarcaAdatbazisbaMent(kijeloltTranzakcio.getErintettPenztarca());
@@ -685,16 +684,19 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 }
             } else if (kiadasokTabla.getSelectedRow() != -1) {
                 kijeloltSorSzama = kiadasokTabla.getSelectedRow();
-                kijeloltTranzakcio = kiadasokLista.get(kijeloltSorSzama);
-                UjModositKiadasDialog kiadasModosit = new UjModositKiadasDialog(this, kijeloltTranzakcio, penztarcakLista, kiadasokLista);
+                kijeloltTranzakcio = megszurtKiadasokLista.get(kijeloltSorSzama);
+                UjModositKiadasDialog kiadasModosit = new UjModositKiadasDialog(this, kijeloltTranzakcio, penztarcakLista, megszurtKiadasokLista);
                 kiadasModosit.setVisible(true);
                 if (kiadasModosit.isOk()) {
-                    kiadasokLista.remove(kijeloltSorSzama);
-                    kiadasokLista.add(kijeloltSorSzama, kiadasModosit.getKiadas());
+                    megszurtKiadasokLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
+                    kiadasokLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
+                    kiadasokLista.add(kijeloltTranzakcio.getId(), kiadasModosit.getKiadas());
+                    megszurtKiadasokLista.add(kijeloltTranzakcio.getId(), kiadasModosit.getKiadas());
                     kiadasAdatbazisbaMent(kiadasModosit.getKiadas());
                     penztarcaOsszegModositasKiadasEseten(kiadasModosit.getKiadas());
                     penztarcaAdatbazisbaMent(kijeloltTranzakcio.getErintettPenztarca());
                     penztarcaAdatbazisbaMent(kiadasModosit.getKiadas().getErintettPenztarca());
+                    kiadasokAktualisRendezesBeallit();
                 }
             }
             tablazatokFeltolt();
@@ -730,6 +732,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         if (ujKiadas.isOk()) {
             kiadasokLista.add(ujKiadas.getKiadas());
             szuresBeallit();
+            kiadasokAktualisRendezesBeallit();
             kiadasLevonasaPenztarcabol(ujKiadas.getKiadas());
             tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
             tablaFeltolt(penztarcakTable, penztarcakLista);
@@ -764,7 +767,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 kijeloltTranzakcio = bevetelekLista.get(kijeloltSorSzama);
                 if (JOptionPane.showConfirmDialog(rootPane, "Biztosan törölni szeretnéd a kiválasztott bevételt?", "Törlés megerősítése", JOptionPane.YES_NO_OPTION) == 0) {
                     penztarcaOsszegModositasBevetelTorlesEseten((Bevetel) kijeloltTranzakcio);
-                    bevetelekLista.remove(bevetelekTabla.getSelectedRow());
+                    megszurtBevetelLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
+                    bevetelekLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
                     try {
                         bevetelIrany.torol(kijeloltTranzakcio.getId());
                     } catch (KoltsegvetesException ex) {
@@ -774,10 +778,11 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 }
             } else if (kiadasokTabla.getSelectedRow() != -1) {
                 kijeloltSorSzama = kiadasokTabla.getSelectedRow();
-                kijeloltTranzakcio = kiadasokLista.get(kijeloltSorSzama);
+                kijeloltTranzakcio = megszurtKiadasokLista.get(kijeloltSorSzama);
                 if (JOptionPane.showConfirmDialog(rootPane, "Biztosan törölni szeretnéd a kiválasztott kiadást?", "Törlés megerősítése", JOptionPane.YES_NO_OPTION) == 0) {
                     penztarcaOsszegModositasKiadasTorlesEseten((Kiadas) kijeloltTranzakcio);
-                    kiadasokLista.remove(kiadasokTabla.getSelectedRow());
+                    megszurtKiadasokLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
+                    kiadasokLista.removeIf(new tesztIdAlapjan(kijeloltTranzakcio.getId()));
                     try {
                         kiadasIrany.torol(kijeloltTranzakcio.getId());
                     } catch (KoltsegvetesException ex) {
@@ -872,35 +877,39 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         mutatandoHonap = Month.DECEMBER;
         mutatottHonapValt();
     }//GEN-LAST:event_miDecemberActionPerformed
-
+    
     private void tablazatFejlecMutatoBeallit() {
         bevetelekTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         kiadasokTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
-
+    
     private void mutatottHonapValt() {
         szuresBeallit();
         osszesBevetelMezoBeallit();
         osszesKiadasTipusMezokBeallit();
         tranzakcioTablazatokFeltolt();
     }
-
+    
+    private void kiadasokAktualisRendezesBeallit() {
+        megszurtKiadasokLista.sort(aktualisKiadasRendezes.reversed());
+    }
+    
     private void szuresBeallit() {
         megszurtKiadasokLista = kiadasokLista.stream().filter(new aktualisHonap(mutatandoHonap)).collect(Collectors.toCollection(ArrayList::new));
         megszurtBevetelLista = bevetelekLista.stream().filter(new aktualisHonap(mutatandoHonap)).collect(Collectors.toCollection(ArrayList::new));
     }
-
+    
     private void tranzakcioTablazatokFeltolt() {
         tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
         tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
     }
-
+    
     private void tablazatokFeltolt() {
         tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
         tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
         tablaFeltolt(penztarcakTable, penztarcakLista);
     }
-
+    
     private void osszegzoMezokBeallit() {
         osszesMegtakaritasBeallit();
         osszesPenzBeallit();
@@ -909,7 +918,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         osszesBevetelMezoBeallit();
         osszesKiadasTipusMezokBeallit();
     }
-
+    
     private void tablazatRendezesiLehetosegekBeallit() {
         setBevetelTablaFejlecActionListener();
         setKiadasTablaFejlecActionListener();
@@ -922,7 +931,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             PenztarcaComparator tarcaComp = new PenztarcaComparator();
             MegnevezesComparator megnevezesComp = new MegnevezesComparator();
             OsszegComparator osszegComp = new OsszegComparator();
-
+            
             @Override
             public void mouseClicked(MouseEvent e) {
                 int oszlopSzama = bevetelekTabla.columnAtPoint(e.getPoint());
@@ -954,38 +963,46 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     //Sorrendezési action listener a kivételek táblához
     private void setKiadasTablaFejlecActionListener() {
         kiadasokTabla.getTableHeader().addMouseListener(new MouseAdapter() {
+            //A comparatorok azért vannak itt létrehozva és nem a switchen belül, hogy kattintásra működjön az ide-oda rendezés.
+            //Különben minden kattintásra új comparator jönne létre és kétszer kellene kattintani az ellentétes irányú rendezéshez.
             DatumComparator datumComp = new DatumComparator();
             PenztarcaComparator tarcaComp = new PenztarcaComparator();
             MegnevezesComparator megnevezesComp = new MegnevezesComparator();
             OsszegComparator osszegComp = new OsszegComparator();
             KategoriaComparator kategoriaComp = new KategoriaComparator();
             VasarlasHelyComparator vasarlashelyComp = new VasarlasHelyComparator();
-
+            
             @Override
             public void mouseClicked(MouseEvent e) {
                 int oszlopSzama = kiadasokTabla.columnAtPoint(e.getPoint());
                 switch (oszlopSzama) {
                     case 0:
+                        aktualisKiadasRendezes = datumComp;
                         megszurtKiadasokLista.sort(datumComp);
                         datumComp.setForditott(!datumComp.getForditott());
                         break;
                     case 1:
+                        aktualisKiadasRendezes = tarcaComp;
                         megszurtKiadasokLista.sort(tarcaComp);
                         tarcaComp.setForditott(!tarcaComp.getForditott());
                         break;
                     case 2:
+                        aktualisKiadasRendezes = megnevezesComp;
                         megszurtKiadasokLista.sort(megnevezesComp);
                         megnevezesComp.setForditott(!megnevezesComp.getForditott());
                         break;
                     case 3:
+                        aktualisKiadasRendezes = kategoriaComp;
                         megszurtKiadasokLista.sort(kategoriaComp);
                         kategoriaComp.setForditott(!kategoriaComp.getForditott());
                         break;
                     case 4:
+                        aktualisKiadasRendezes = vasarlashelyComp;
                         megszurtKiadasokLista.sort(vasarlashelyComp);
                         vasarlashelyComp.setForditott(!vasarlashelyComp.getForditott());
                         break;
                     case 5:
+                        aktualisKiadasRendezes = osszegComp;
                         megszurtKiadasokLista.sort(osszegComp);
                         osszegComp.setForditott(!osszegComp.getForditott());
                         break;
@@ -996,7 +1013,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void osszesKiadasTipusMezokBeallit() {
         int rezsiOsszeg = 0, elelmiszerOsszeg = 0, etkezesOsszeg = 0, kozlekedesOsszeg = 0, egeszsegOsszeg = 0, egyebOsszeg = 0;
         for (Kiadas kiadas : megszurtKiadasokLista) {
@@ -1034,7 +1051,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 + egeszsegOsszeg
                 + egyebOsszeg);
     }
-
+    
     private void osszesBevetelMezoBeallit() {
         int osszeg = 0;
         for (Bevetel bevetel : megszurtBevetelLista) {
@@ -1042,7 +1059,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         }
         mezoBeallit(tfOsszesBevetel, osszeg);
     }
-
+    
     private void osszesMegtakaritasBeallit() {
         int osszeg = 0;
         for (Penztarca tarca : penztarcakLista) {
@@ -1081,11 +1098,11 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private void osszesVagyonBeallit() {
         mezoBeallit(tfOsszesVagyon, osszesPenzBeallit() + osszesSzepKartyaBeallit());
     }
-
+    
     private void mezoBeallit(JTextField tf, int osszeg) {
         tf.setText(szamFormazo.format(osszeg) + "");
     }
-
+    
     private void penztarcaAdatbazisbaMent(Penztarca penztarca) {
         try {
             penztarcaIrany.elment(penztarca);
@@ -1093,7 +1110,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Hiba a pénztárcák mentése közben!", JOptionPane.OK_OPTION);
         }
     }
-
+    
     private void bevetelAdatbazisbaMent(Bevetel bevetel) {
         try {
             bevetelIrany.elment(bevetel);
@@ -1101,7 +1118,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Hiba a bevételek mentése közben!", JOptionPane.OK_OPTION);
         }
     }
-
+    
     private void kiadasAdatbazisbaMent(Kiadas kiadas) {
         try {
             kiadasIrany.elment(kiadas);
@@ -1109,12 +1126,12 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Hiba a kiadások mentése közben!", JOptionPane.OK_OPTION);
         }
     }
-
+    
     private void atvezetesVegrehajt(AtvezetesDialog atvezetes) {
         penztarcaKeres(atvezetes.getForrasTarcaNev()).setOsszeg(penztarcaKeres(atvezetes.getForrasTarcaNev()).getOsszeg() - atvezetes.getAtvezetettOsszeg());
         penztarcaKeres(atvezetes.getCelTarcaNev()).setOsszeg(penztarcaKeres(atvezetes.getCelTarcaNev()).getOsszeg() + atvezetes.getAtvezetettOsszeg());
     }
-
+    
     private void penztarcaOsszegModositasKiadasEseten(Kiadas modositottKiadas) {
         Kiadas eredetiKiadas = (Kiadas) kijeloltTranzakcio;
         for (Penztarca tarca : penztarcakLista) {
@@ -1126,7 +1143,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void kiadasLevonasaPenztarcabol(Kiadas kiadas) {
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getNev().equals(kiadas.getErintettPenztarca().getNev())) {
@@ -1134,7 +1151,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void penztarcaOsszegModositasKiadasTorlesEseten(Kiadas toroltKiadas) {
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getNev().equals(toroltKiadas.getErintettPenztarca().getNev())) {
@@ -1142,7 +1159,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void penztarcaOsszegModositasBevetelEseten(Bevetel modositottBevetel) {
         Bevetel eredetiBevetel = (Bevetel) kijeloltTranzakcio;
         for (Penztarca tarca : penztarcakLista) {
@@ -1154,7 +1171,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void penztarcaOsszegModositasBevetelTorlesEseten(Bevetel toroltBevetel) {
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getNev().equals(toroltBevetel.getErintettPenztarca().getNev())) {
@@ -1162,7 +1179,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void bevetelHozzaadasaPenztarcahoz(Bevetel bevetel) {
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getNev().equals(bevetel.getErintettPenztarca().getNev())) {
@@ -1170,7 +1187,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private Object[] sorKeszit(Object elem) {
         if (elem instanceof Penztarca) {
             Object[] ujSor = new Object[penztarcaTablaOszlopSzam];
@@ -1199,7 +1216,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             return ujSor;
         }
     }
-
+    
     private void tablaFeltolt(JTable tabla, List<? extends Object> lista) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         if (model.getRowCount() > 0) {
@@ -1211,7 +1228,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         tabla.setFillsViewportHeight(true);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-
+    
     private Penztarca penztarcaKeres(String nev) {
         for (Penztarca tarca : penztarcakLista) {
             if (tarca.getNev().equals(nev)) {
@@ -1220,7 +1237,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         }
         return null;
     }
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -198,7 +198,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="327" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bevetelekTablaTarolo" pref="326" max="32767" attributes="0"/>
+                              <Component id="bevetelekTablaTarolo" pref="348" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -236,29 +236,19 @@
                                   <Component id="tfOsszesEgeszseg" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbOsszesKozlekedes" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbOsszesElelmiszer" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="tfOsszesElelmiszer" min="-2" pref="126" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="tfOsszesKozlekedes" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbOsszesEgyeb" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="tfOsszesEgyeb" min="-2" pref="126" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lbOsszesEgyeb" max="32767" attributes="0"/>
+                                  <Component id="lbOsszesKozlekedes" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="lbOsszesElelmiszer" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfOsszesKozlekedes" max="32767" attributes="0"/>
+                                  <Component id="tfOsszesElelmiszer" max="32767" attributes="0"/>
+                                  <Component id="tfOsszesEgyeb" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="kiadasokTablaTarolo" max="32767" attributes="0"/>
+                          <Component id="kiadasokTablaTarolo" pref="558" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
@@ -314,12 +304,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="kiadasokTablaTarolo" alignment="0" pref="387" max="32767" attributes="0"/>
-                          <Component id="bevetelekTablaTarolo" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane1" pref="569" max="32767" attributes="0"/>
+                          <Component id="bevetelekTablaTarolo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="kiadasokTablaTarolo" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
