@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +40,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private List<Kiadas> megszurtKiadasokLista = new ArrayList<>();
     private Tranzakcio kijeloltTranzakcio;
     private DecimalFormat szamFormazo = new DecimalFormat("###,### Ft");
+    private Month mutatandoHonap = LocalDate.now().getMonth();
 
     public KoltsegvetesFoablak() {
         initComponents();
@@ -69,6 +71,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu3 = new javax.swing.JMenu();
         lbPenztarcak = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         penztarcakTable = new javax.swing.JTable();
@@ -112,6 +115,33 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         penztarcaKezelesMenuItem = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        miJanuar = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        miFebruar = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        miMarcius = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        miAprilis = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        miMajus = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        miJunius = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        miJulius = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        miAugusztus = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        miSzeptember = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        miOktober = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        miNovember = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        miDecember = new javax.swing.JMenuItem();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Családi Költségvetés Tervező");
@@ -341,6 +371,121 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         jMenu1.add(penztarcaKezelesMenuItem);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Nézet");
+
+        jMenu4.setText("Hónap");
+
+        miJanuar.setText("Január");
+        miJanuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miJanuarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miJanuar);
+        jMenu4.add(jSeparator2);
+
+        miFebruar.setText("Február");
+        miFebruar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFebruarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miFebruar);
+        jMenu4.add(jSeparator1);
+
+        miMarcius.setText("Március");
+        miMarcius.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMarciusActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miMarcius);
+        jMenu4.add(jSeparator3);
+
+        miAprilis.setText("Április");
+        miAprilis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAprilisActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miAprilis);
+        jMenu4.add(jSeparator4);
+
+        miMajus.setText("Május");
+        miMajus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMajusActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miMajus);
+        jMenu4.add(jSeparator5);
+
+        miJunius.setText("Június");
+        miJunius.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miJuniusActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miJunius);
+        jMenu4.add(jSeparator6);
+
+        miJulius.setText("Július");
+        miJulius.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miJuliusActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miJulius);
+        jMenu4.add(jSeparator7);
+
+        miAugusztus.setText("Augusztus");
+        miAugusztus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAugusztusActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miAugusztus);
+        jMenu4.add(jSeparator8);
+
+        miSzeptember.setText("Szeptember");
+        miSzeptember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSzeptemberActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miSzeptember);
+        jMenu4.add(jSeparator9);
+
+        miOktober.setText("Október");
+        miOktober.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOktoberActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miOktober);
+        jMenu4.add(jSeparator10);
+
+        miNovember.setText("November");
+        miNovember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovemberActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miNovember);
+        jMenu4.add(jSeparator11);
+
+        miDecember.setText("December");
+        miDecember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDecemberActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miDecember);
+
+        jMenu2.add(jMenu4);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -667,14 +812,87 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         bevetelekTabla.clearSelection();
     }//GEN-LAST:event_kiadasokTablaMouseClicked
 
+    private void miJanuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJanuarActionPerformed
+        mutatandoHonap = Month.JANUARY;
+        mutatottHonapValt();
+        
+    }//GEN-LAST:event_miJanuarActionPerformed
+
+    private void miFebruarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFebruarActionPerformed
+        mutatandoHonap = Month.FEBRUARY;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miFebruarActionPerformed
+
+    private void miMarciusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMarciusActionPerformed
+        mutatandoHonap = Month.MARCH;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miMarciusActionPerformed
+
+    private void miAprilisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAprilisActionPerformed
+        mutatandoHonap = Month.APRIL;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miAprilisActionPerformed
+
+    private void miMajusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMajusActionPerformed
+        mutatandoHonap = Month.MAY;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miMajusActionPerformed
+
+    private void miJuniusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJuniusActionPerformed
+        mutatandoHonap = Month.JUNE;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miJuniusActionPerformed
+
+    private void miJuliusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miJuliusActionPerformed
+        mutatandoHonap = Month.JULY;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miJuliusActionPerformed
+
+    private void miAugusztusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAugusztusActionPerformed
+        mutatandoHonap = Month.AUGUST;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miAugusztusActionPerformed
+
+    private void miSzeptemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSzeptemberActionPerformed
+        mutatandoHonap = Month.SEPTEMBER;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miSzeptemberActionPerformed
+
+    private void miOktoberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOktoberActionPerformed
+        mutatandoHonap = Month.OCTOBER;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miOktoberActionPerformed
+
+    private void miNovemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovemberActionPerformed
+        mutatandoHonap = Month.NOVEMBER;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miNovemberActionPerformed
+
+    private void miDecemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDecemberActionPerformed
+        mutatandoHonap = Month.DECEMBER;
+        mutatottHonapValt();
+    }//GEN-LAST:event_miDecemberActionPerformed
+
     private void tablazatFejlecMutatoBeallit() {
         bevetelekTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         kiadasokTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
+    private void mutatottHonapValt() {
+        szuresBeallit();
+        osszesBevetelMezoBeallit();
+        osszesKiadasTipusMezokBeallit();
+        tranzakcioTablazatokFeltolt();
+    }
+
     private void szuresBeallit() {
-        megszurtKiadasokLista = kiadasokLista.stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
-        megszurtBevetelLista = bevetelekLista.stream().filter(new aktualisHonap(LocalDate.now().getMonth().name())).collect(Collectors.toCollection(ArrayList::new));
+        megszurtKiadasokLista = kiadasokLista.stream().filter(new aktualisHonap(mutatandoHonap)).collect(Collectors.toCollection(ArrayList::new));
+        megszurtBevetelLista = bevetelekLista.stream().filter(new aktualisHonap(mutatandoHonap)).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private void tranzakcioTablazatokFeltolt() {
+        tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
+        tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
     }
 
     private void tablazatokFeltolt() {
@@ -748,33 +966,33 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 int oszlopSzama = kiadasokTabla.columnAtPoint(e.getPoint());
                 switch (oszlopSzama) {
                     case 0:
-                        kiadasokLista.sort(datumComp);
+                        megszurtKiadasokLista.sort(datumComp);
                         datumComp.setForditott(!datumComp.getForditott());
                         break;
                     case 1:
-                        kiadasokLista.sort(tarcaComp);
+                        megszurtKiadasokLista.sort(tarcaComp);
                         tarcaComp.setForditott(!tarcaComp.getForditott());
                         break;
                     case 2:
-                        kiadasokLista.sort(megnevezesComp);
+                        megszurtKiadasokLista.sort(megnevezesComp);
                         megnevezesComp.setForditott(!megnevezesComp.getForditott());
                         break;
                     case 3:
-                        kiadasokLista.sort(kategoriaComp);
+                        megszurtKiadasokLista.sort(kategoriaComp);
                         kategoriaComp.setForditott(!kategoriaComp.getForditott());
                         break;
                     case 4:
-                        kiadasokLista.sort(vasarlashelyComp);
+                        megszurtKiadasokLista.sort(vasarlashelyComp);
                         vasarlashelyComp.setForditott(!vasarlashelyComp.getForditott());
                         break;
                     case 5:
-                        kiadasokLista.sort(osszegComp);
+                        megszurtKiadasokLista.sort(osszegComp);
                         osszegComp.setForditott(!osszegComp.getForditott());
                         break;
                     default:
                         break;
                 }
-                tablaFeltolt(kiadasokTabla, kiadasokLista);
+                tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
             }
         });
     }
@@ -1045,8 +1263,22 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private javax.swing.JButton btUjBevetel;
     private javax.swing.JButton btUjKiadas;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JTable kiadasokTabla;
     private javax.swing.JScrollPane kiadasokTablaTarolo;
     private javax.swing.JLabel lbBevetelek;
@@ -1065,6 +1297,18 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private javax.swing.JLabel lbOsszesVagyon;
     private javax.swing.JLabel lbOsszesVagyon1;
     private javax.swing.JLabel lbPenztarcak;
+    private javax.swing.JMenuItem miAprilis;
+    private javax.swing.JMenuItem miAugusztus;
+    private javax.swing.JMenuItem miDecember;
+    private javax.swing.JMenuItem miFebruar;
+    private javax.swing.JMenuItem miJanuar;
+    private javax.swing.JMenuItem miJulius;
+    private javax.swing.JMenuItem miJunius;
+    private javax.swing.JMenuItem miMajus;
+    private javax.swing.JMenuItem miMarcius;
+    private javax.swing.JMenuItem miNovember;
+    private javax.swing.JMenuItem miOktober;
+    private javax.swing.JMenuItem miSzeptember;
     private javax.swing.JMenuItem penztarcaKezelesMenuItem;
     private javax.swing.JTable penztarcakTable;
     private javax.swing.JTextField tfOsszesBevetel;

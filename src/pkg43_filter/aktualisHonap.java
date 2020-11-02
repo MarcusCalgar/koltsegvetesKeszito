@@ -9,8 +9,12 @@ public class aktualisHonap implements Predicate<Tranzakcio> {
 
     private Month aktualisHonap;
 
-    public aktualisHonap(String honapNeve) {
-        this.aktualisHonap = Month.valueOf(honapNeve);
+    public Month getAktualisHonap() {
+        return aktualisHonap;
+    }
+    
+    public aktualisHonap(Month mutatandoHonap) {
+        this.aktualisHonap = mutatandoHonap;
     }
 
     @Override
