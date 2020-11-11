@@ -1,16 +1,17 @@
 package pkg43_koltsegvetes.comparator;
 
-import pkg43_koltsegvetes.model.Tranzakcio;
+import java.util.Comparator;
+import pkg43_koltsegvetes.model.Penztarca;
 
-public class PenztarcaComparator extends TranzakcioComparator{
-    
-    @Override
-    public int compare(Tranzakcio tranzakcio1, Tranzakcio tranzakcio2) {
-        if (!forditott) {
-            return tranzakcio1.getErintettPenztarca().getNev().compareTo(tranzakcio2.getErintettPenztarca().getNev());
-        } else {
-            return tranzakcio2.getErintettPenztarca().getNev().compareTo(tranzakcio1.getErintettPenztarca().getNev());
-        }  
+public abstract class PenztarcaComparator implements Comparator<Penztarca> {
+
+    boolean forditott = false;
+
+    public boolean getForditott() {
+        return forditott;
     }
 
+    public void setForditott(boolean forditott) {
+        this.forditott = forditott;
+    }
 }

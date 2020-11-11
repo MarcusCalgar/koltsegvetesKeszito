@@ -77,7 +77,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         lbPenztarcak = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        penztarcakTable = new javax.swing.JTable();
+        penztarcakTabla = new javax.swing.JTable();
         lbFoablakCim = new javax.swing.JLabel();
         lbBevetelek = new javax.swing.JLabel();
         btUjBevetel = new javax.swing.JButton();
@@ -152,8 +152,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         lbPenztarcak.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lbPenztarcak.setText("Pénztárcák");
 
-        penztarcakTable.setBackground(new java.awt.Color(255, 255, 204));
-        penztarcakTable.setModel(new javax.swing.table.DefaultTableModel(
+        penztarcakTabla.setBackground(new java.awt.Color(255, 255, 204));
+        penztarcakTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -176,8 +176,8 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        penztarcakTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(penztarcakTable);
+        penztarcakTabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(penztarcakTabla);
 
         lbFoablakCim.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         lbFoablakCim.setText("Családi Költségvetés Tervező");
@@ -659,7 +659,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         penztarcaKezelo.setVisible(true);
         if (penztarcaKezelo.isOk()) {
             penztarcakLista = penztarcaKezelo.getPenztarcaLista();
-            tablaFeltolt(penztarcakTable, penztarcakLista);
+            tablaFeltolt(penztarcakTabla, penztarcakLista);
             osszegzoMezokBeallit();
         }
     }//GEN-LAST:event_penztarcaKezelesMenuItemActionPerformed
@@ -714,7 +714,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             szuresBeallit();
             bevetelHozzaadasaPenztarcahoz(ujBevetel.getBevetel());
             tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
-            tablaFeltolt(penztarcakTable, penztarcakLista);
+            tablaFeltolt(penztarcakTabla, penztarcakLista);
             bevetelAdatbazisbaMent(ujBevetel.getBevetel());
             penztarcaAdatbazisbaMent(ujBevetel.getBevetel().getErintettPenztarca());
             try {
@@ -735,7 +735,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             kiadasokAktualisRendezesBeallit();
             kiadasLevonasaPenztarcabol(ujKiadas.getKiadas());
             tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
-            tablaFeltolt(penztarcakTable, penztarcakLista);
+            tablaFeltolt(penztarcakTabla, penztarcakLista);
             kiadasAdatbazisbaMent(ujKiadas.getKiadas());
             penztarcaAdatbazisbaMent(ujKiadas.getKiadas().getErintettPenztarca());
             try {
@@ -803,7 +803,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
         atvezetes.setVisible(true);
         if (atvezetes.isOk()) {
             atvezetesVegrehajt(atvezetes);
-            tablaFeltolt(penztarcakTable, penztarcakLista);
+            tablaFeltolt(penztarcakTabla, penztarcakLista);
             penztarcaAdatbazisbaMent(penztarcaKeres(atvezetes.getForrasTarcaNev()));
             penztarcaAdatbazisbaMent(penztarcaKeres(atvezetes.getCelTarcaNev()));
         }
@@ -879,6 +879,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     }//GEN-LAST:event_miDecemberActionPerformed
     
     private void tablazatFejlecMutatoBeallit() {
+        penztarcakTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         bevetelekTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         kiadasokTabla.getTableHeader().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -907,7 +908,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private void tablazatokFeltolt() {
         tablaFeltolt(kiadasokTabla, megszurtKiadasokLista);
         tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
-        tablaFeltolt(penztarcakTable, penztarcakLista);
+        tablaFeltolt(penztarcakTabla, penztarcakLista);
     }
     
     private void osszegzoMezokBeallit() {
@@ -920,15 +921,46 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     }
     
     private void tablazatRendezesiLehetosegekBeallit() {
+        setPenztarcakTablaFejlecActionListener();
         setBevetelTablaFejlecActionListener();
         setKiadasTablaFejlecActionListener();
+    }
+    
+    private void setPenztarcakTablaFejlecActionListener(){
+    penztarcakTabla.getTableHeader().addMouseListener(new MouseAdapter() {
+        PenztarcaNevComparator penztarcaNevComp = new PenztarcaNevComparator();
+        PenztarcaTipusComparator penztarcaTipusComp = new PenztarcaTipusComparator();
+        PenztarcaOsszegComparator penztarcaOsszegComp = new PenztarcaOsszegComparator();
+        
+        @Override
+        public void mouseClicked(MouseEvent e){
+        int oszlopSzama = penztarcakTabla.columnAtPoint(e.getPoint());
+        switch (oszlopSzama) {
+                    case 0:
+                        penztarcakLista.sort(penztarcaNevComp);
+                        penztarcaNevComp.setForditott(!penztarcaNevComp.getForditott());
+                        break;
+                    case 1:
+                        penztarcakLista.sort(penztarcaTipusComp);
+                        penztarcaTipusComp.setForditott(!penztarcaTipusComp.getForditott());
+                        break;
+                    case 2:
+                        penztarcakLista.sort(penztarcaOsszegComp);
+                        penztarcaOsszegComp.setForditott(!penztarcaOsszegComp.getForditott());
+                        break;                    
+                    default:
+                        break;
+                }
+                tablaFeltolt(penztarcakTabla, penztarcakLista);
+        }
+});
     }
 
     //Sorrendezési action listener a bevételek táblához
     private void setBevetelTablaFejlecActionListener() {
         bevetelekTabla.getTableHeader().addMouseListener(new MouseAdapter() {
             DatumComparator datumComp = new DatumComparator();
-            PenztarcaComparator tarcaComp = new PenztarcaComparator();
+            TranzakcioPenztarcaComparator tarcaComp = new TranzakcioPenztarcaComparator();
             MegnevezesComparator megnevezesComp = new MegnevezesComparator();
             OsszegComparator osszegComp = new OsszegComparator();
             
@@ -955,7 +987,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
                     default:
                         break;
                 }
-                tablaFeltolt(bevetelekTabla, bevetelekLista);
+                tablaFeltolt(bevetelekTabla, megszurtBevetelLista);
             }
         });
     }
@@ -966,7 +998,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
             //A comparatorok azért vannak itt létrehozva és nem a switchen belül, hogy kattintásra működjön az ide-oda rendezés.
             //Különben minden kattintásra új comparator jönne létre és kétszer kellene kattintani az ellentétes irányú rendezéshez.
             DatumComparator datumComp = new DatumComparator();
-            PenztarcaComparator tarcaComp = new PenztarcaComparator();
+            TranzakcioPenztarcaComparator tarcaComp = new TranzakcioPenztarcaComparator();
             MegnevezesComparator megnevezesComp = new MegnevezesComparator();
             OsszegComparator osszegComp = new OsszegComparator();
             KategoriaComparator kategoriaComp = new KategoriaComparator();
@@ -1327,7 +1359,7 @@ public class KoltsegvetesFoablak extends javax.swing.JFrame {
     private javax.swing.JMenuItem miOktober;
     private javax.swing.JMenuItem miSzeptember;
     private javax.swing.JMenuItem penztarcaKezelesMenuItem;
-    private javax.swing.JTable penztarcakTable;
+    private javax.swing.JTable penztarcakTabla;
     private javax.swing.JTextField tfOsszesBevetel;
     private javax.swing.JTextField tfOsszesEgeszseg;
     private javax.swing.JTextField tfOsszesEgyeb;
