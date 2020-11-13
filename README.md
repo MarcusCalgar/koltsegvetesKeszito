@@ -17,7 +17,7 @@ they find out, that video game subscriptions and a lot of snacks aren't exactly 
 
 ## Technical Description
 
-The program utilizes a MySQL database to store all relevant data, however, different implementations are also possible. After each start, the program reads the database and loads the data into the program, which shows everything on the screen. By default, the program shows all the entries for the current month.
+The program utilizes a MySQL database to store all relevant data, however, different implementations are also possible. After each start, the program reads the database and loads the data into the program, which shows everything on the screen. By default, the program shows all the entries for the current month. To change the viewed month, go to <b>Nézet</b> -> <b>Hónap</b> and select the required month.
 
 ### Functionality
 
@@ -67,7 +67,7 @@ If everything is done, press <b>OK</b>. The created items are now shown in the l
 
 <a href="https://imgur.com/FlBo6qL"><img src="https://i.imgur.com/FlBo6qL.jpg" title="main screen with 2 added pénztárca" /></a>
 
-#### Adding Bevetels
+#### Adding Bevetel
 
 To add a new Bevetel (income) press the <b>Új bevétel</b> button on the upper right side of the main screen. The "Új bevétel felvitele" window appears.
 
@@ -84,5 +84,27 @@ The new Bevetel is now shown on the main screen.
 <b>Note:</b> The summary fields below the tables are automatically updated with the correct values. These fields make tracking the finances easy to overview.
 
 <a href="https://imgur.com/DNwAAVV"><img src="https://i.imgur.com/DNwAAVV.jpg" title="source: imgur.com" /></a>
+
+#### Adding Kiadas
+
+To add a new Kiadas (expense) press the <b>Új kiadás</b> button on the upper right side of the main screen. The "Új kiadás felvitele" window appears.
+
+1. Select the Időpont (date) of the Kiadas from the date picker dropdown.
+2. Enter the Megnevezés (name).
+3. Select the appropiate Pénztárca from the dropdown.
+4. Enter or select the category. The program has a number of default options, but they are not visible by defualt at this point. Enter "Rezsi" (common expenses), "Élelmiszer" (food), "Étkezés" (takeouts, restaurants etc), "Közlekedés" (travel expenses) or "Egészség" (health) to enable tracking of these types of expenses. Their cummulative is shown in the summary fields below the table.
+5. Enter or select the location or recipient of the expense. The dropdown saves all the previous entries based on Kategória (category). Therefore, switching to a different category will update the "Vásárlás helye" dropdown to show only the related locations/recipients. 
+6. Enter the amount in HUF.
+7. If everything is as desired, press <b>OK</b>, or <b>Mégsem</b> to cancel the action.
+
+<a href="https://imgur.com/GpHLEtX"><img src="https://i.imgur.com/GpHLEtX.jpg" title="source: imgur.com" /></a>
+
+The end result:
+
+<a href="https://imgur.com/3ZBP3Gd"><img src="https://i.imgur.com/3ZBP3Gd.jpg" title="source: imgur.com" /></a>
+
+For this example, I added a new expense to the Élelmiszer category, to show that the summary field automatically updates.
+
+<a href="https://imgur.com/V9wXUkx"><img src="https://i.imgur.com/V9wXUkx.jpg" title="source: imgur.com" /></a>
 
 TBC
