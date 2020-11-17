@@ -23,13 +23,53 @@ The program utilizes a MySQL database to store all relevant data, however, diffe
 
 * Add and modify Penztarcas
 * Add, remove, and modify Tranzakcios, that is, Bevetel and Kiadas items
-* Reroute money from one Penztarca to another
+* Transfer money from one Penztarca to another
 * Sort the content of the tables in both directions with a single click
 * Filter entries based on the Month they are entered
 
 After starting the program, the main screen shows up. For the sake of simplicity, an empty table is used. At any time an action is not needed, press <b>Mégsem</b> to cancel the action.
 
 <a href="https://imgur.com/csrUToD"><img src="https://imgur.com/csrUToD.jpeg" title="program main screen" /></a>
+
+### GUI
+
+There are three tables on the main screen. The leftmost shows the available Pénztárcas, the middle one the Bevétels, and the rightmost the Kiadás'.
+
+Next to the Kiadás table, the buttons for the main actions of the program are located.
+
+Below the tables are the summary fields that automatically calculate and show various values based on the entries in the tables.
+
+#### Pénztárca summary fields
+
+- Összes Megtakarítás: the sum of all pénztárca values that is a "megtakarítás" (savings) type.
+
+- Összes Szép kártya: the sum of all pénztárca values that is a "szép kártya" type.
+
+- Összes Pénz: the sum of all pénztárca values that is a "készpénz" or "bankkártya" type.
+
+- Összes vagyon: the sum of "Összes Szép Kártya" and "Összes Pénz".
+
+#### Bevételek summary field
+
+- Összes bevétel: the sum of all the Bevétel entries
+
+#### Kiadások summary field
+
+- Összes Rezsi: the sum of all Kiadás entry that has the category of "Rezsi".
+
+- Összes Élelmiszer: the sum of all Kiadás entry that has the category of "Élelmiszer".
+
+- Összes Étkezés: the sum of all Kiadás entry that has the category of "Étkezés".
+
+- Összes Közlekedés: the sum of all Kiadás entry that has the category of "Közlekedés".
+
+- Összes Egészség: the sum of all Kiadás entry that has the category of "Egészség".
+
+- Összes Egyéb kat.: the sum of all Kiadás entry that has the category that is not one of the above.
+
+- Összes Kiadás: the sum of all the entries in the Kiadás table.
+
+### How to Use
 
 #### Managing Pénztárcas
 
@@ -107,4 +147,75 @@ For this example, I added a new expense to the Élelmiszer category, to show tha
 
 <a href="https://imgur.com/V9wXUkx"><img src="https://i.imgur.com/V9wXUkx.jpg" title="source: imgur.com" /></a>
 
-TBC
+#### Modifying an Entry
+
+Modification of Bevétel and Kiadás entries are also possible. To do that, click the entry to be modified in either the Bevételek, or Kiadások table, then click the <b>Módosítás</b> button on the right. 
+
+<b>Note:</b> Only one selection is possible, tehrefore it is only possible, to modify one entry at a time.
+
+<b>Note:</b> If no entry is selected before clicking the <b>Módosítás</b> button, an error message is shown.
+
+##### Modifying a Bevétel
+
+1. To modify a bevétel, select one, then click the <b>Módosítás</b> button. The values of the entry are automatically loaded.
+
+<a href="https://imgur.com/qOLWQlV"><img src="https://i.imgur.com/qOLWQlV.jpg" title="modifying a bevétel" /></a>
+
+2. Make the required changes as needed. In this example, the Összeg of the bevétel is changed from 2.500 to 12.500.
+
+3. Click <b>OK</b>.
+
+The entry is now updated in the Bevételek table, also, the summary fields update automatically.
+
+<a href="https://imgur.com/0NdFsXu"><img src="https://i.imgur.com/0NdFsXu.jpg" title="main after bevétel moficiation" /></a>
+
+##### Modifying a Kiadás
+
+1. To modify a kiadás, select one, then click the <b>Módosítás</b> button. The values of the entry are automatically loaded.
+
+<a href="https://imgur.com/hwoaj4K"><img src="https://i.imgur.com/hwoaj4K.jpg" title="modifying a kiadás" /></a>
+
+2. Make the required changes as needed. In this example, the Összeg of the kiadás is changed from 3.000 to 13.000. Also, the Kategória is changed to Közlekedés, and a new Vásárlás helye is also added.
+
+3. Click <b>OK</b>.
+
+The entry is now updated in the Kiadások table, also, the summary fields update automatically.
+
+<a href="https://imgur.com/SQtjPMR"><img src="https://i.imgur.com/SQtjPMR.jpg" title="main after kiadás modification" /></a>
+
+#### Transfer Between two Pénztárca
+
+Unfortunately, now the Teszt 2 Pénztárca is in negative. It is possible to tranfer money between two Pénztárca.
+
+<b>Note:</b> Transferring money between Pénztárcas do not leave a record. Therefore, if a transfer is entered incorrectly, there is no way to redo the action. However, it is possible to do another transfer in reverse, thus negating the error.
+
+1. To transfer between Pénztárcas, click the <b>Átvezetés</b> button on the right.
+
+2. Choose the pénztárca from where the money is to be transferred, and the one where the money is being transferred to.
+
+3. Enter the amount.
+
+<a href="https://imgur.com/tDIzPxh"><img src="https://i.imgur.com/tDIzPxh.jpg" title="átvezetés" /></a>
+
+4. If everything is as needed, click <b>OK</b>. Once again, the summary fields automatically update.
+
+<a href="https://imgur.com/GGQpMon"><img src="https://i.imgur.com/GGQpMon.jpg" title="main after átvezetés" /></a>
+
+#### Deleting an Entry
+
+To delete an entry, select it from the tables, then click the <b>Törlés</b> button on the right. A popup appears, click <b>Yes</b> to confirm the deletion, or <b>No</b>, to cancel the action. In this example, a kiadás is deleted.
+
+<a href="https://imgur.com/O6jypXm"><img src="https://i.imgur.com/O6jypXm.jpg" title="deletion" /></a>
+
+The selected item is removed from the list, and the summary fields are automatically updated.
+
+<a href="https://imgur.com/z2bkpkR"><img src="https://i.imgur.com/z2bkpkR.jpg" title="after deletion" /></a>
+
+#### Sorting
+
+It is possible to sort the tables according to all the columns of the tables. To do so, click the header of column in any table. The program sorts the entries in ascending or descending order. Click again, to reverse the sorting.
+
+#### Quitting
+
+To exit the program, click the <b>Kilépés</b> button at the lower right corner of the screen.
+
